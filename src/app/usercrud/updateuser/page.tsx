@@ -17,7 +17,7 @@ export default function UpdateUserPage() {
     setUpdatedUser({ ...updatedUser, [event.target.name]: event.target.value });
   };
 
-  const updateUser = (id: number) => {
+  const updateUser = (id: string) => {
     const user = usersQuery.data?.find((user) => user.id === id);
     setUpdatedUser(user);
   };
