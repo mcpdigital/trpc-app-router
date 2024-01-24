@@ -13,16 +13,16 @@ export default function UpdateUserPage() {
   const usersQuery = trpc.users.getUsers.useQuery();
   const updateUserMutation = trpc.users.updateUser.useMutation();
 
-  const handleInputChange = (event) => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUpdatedUser({ ...updatedUser, [event.target.name]: event.target.value });
   };
 
-  const updateUser = (id) => {
-    const user = usersQuery.data.find((user) => user.id === id);
+  const updateUser = (id: number) => {
+    const user = usersQuery.data?.find((user) => user.id === id);
     setUpdatedUser(user);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
     updateUserMutation.mutate({ id: Number(updatedUser.id), ...updatedUser });
   };
