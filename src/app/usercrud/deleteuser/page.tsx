@@ -7,7 +7,7 @@ export default function DeleteUserPage() {
   const usersQuery = trpc.users.getUsers.useQuery();
   const deleteUserMutation = trpc.users.deleteUser.useMutation();
 
-  const deleteUser = (id) => {
+  const deleteUser = (id: number) => {
     deleteUserMutation.mutate({ id: Number(id) });
   };
 
