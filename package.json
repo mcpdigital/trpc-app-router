@@ -16,6 +16,7 @@
     "@trpc/client": "^10.44.1",
     "@trpc/react-query": "^10.44.1",
     "@trpc/server": "^10.44.1",
+    "ai": "^2.2.31",
     "next": "14.0.3",
     "openai": "^4.25.0",
     "react": "^18",
