@@ -12,8 +12,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "TRPC App Router",
-  description: "Implement TRPC on the new next app router",
+  title: "TRPC App Router Working Example",
+  description: "Implement TRPC on the new next 14 app router",
 };
 
 export default function RootLayout({
