@@ -1,5 +1,5 @@
 import React from "react";
-import { ButtonTailblocksBlue } from "~/twstyles/buttons";
+import { ButtonTailblocksBlue } from "../../twstyles/buttons";
 
 const TailBlocks = () => {
   return (
