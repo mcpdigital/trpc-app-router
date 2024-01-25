@@ -13,24 +13,28 @@ export default function UpdateUserPage() {
   const usersQuery = trpc.users.getUsers.useQuery();
   const updateUserMutation = trpc.users.updateUser.useMutation();
 
+  // Handle input change
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUpdatedUser({ ...updatedUser, [event.target.name]: event.target.value });
   };
 
-  const updateUser = (id: string | number) => {
-    const user = usersQuery.data?.find((user) => user.id === id);
+  // Update user
+  const updateUser = (id: string) => {
+    const user = usersQuery.data?.find((user) => user.id === Number(id));
     if (user) {
       setUpdatedUser({
         ...user,
-        id: String(user.id),
+        id: user.id.toString(),
         avatar: user.avatar ? user.avatar : "",
       });
     }
   };
 
+  // Handle submit
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    updateUserMutation.mutate({ id: updatedUser.id, ...updatedUser });
+    const { id, ...rest } = updatedUser;
+    updateUserMutation.mutate({ id: Number(id), ...rest });
   };
 
   useEffect(() => {
@@ -69,7 +73,9 @@ export default function UpdateUserPage() {
               <td>{user.name}</td>
               <td>{user.email}</td>
               <td>
-                <button onClick={() => updateUser(user.id)}>Update</button>
+                <button onClick={() => updateUser(user.id.toString())}>
+                  Update
+                </button>
               </td>
             </tr>
           ))}
