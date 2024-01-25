@@ -5,7 +5,7 @@ import { GRAD_WITCH } from "../../tw_gradients";
 import { SignedOut, SignedIn, SignInButton } from "@clerk/nextjs";
 import { ButtonGoldS } from "../../twstyles/buttons";
 
-// This code defines a React component called "DallE". It renders a form with a textarea and a submit button. When the form is submitted, it sends a POST request to "/api/OpenAI/dallev3" with the prompt text from the textarea. If the response is successful, it updates the state with the response data. If there is an error, it sets the response to "Failed to fetch response." The component also displays the response if it exists.
+// This code defines a React component called "DallE". It renders a form with a textarea and a submit button. When the form is submitted, it sends a POST request to "/api/OpenAI/dallev3" with the prompt text from the textarea. If the response is successful, it updates the state with the response data. If there is an error, it sets the response to "Failed to fetch response." The component also displays the response if it exists.---------
 // app/fetch-db/page.tsx file
 
 export default function DallE() {
