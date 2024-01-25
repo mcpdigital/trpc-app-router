@@ -13,7 +13,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "TRPC App Router Working Example",
-  description: "Implement TRPC on the new next 14 app router",
+  description: "Implement TRPC on the new next 14 with  app router",
 };
 
 export default function RootLayout({
