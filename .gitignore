@@ -36,3 +36,6 @@ docker/.env.docker
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+/TEMP/*
+/TEMP
