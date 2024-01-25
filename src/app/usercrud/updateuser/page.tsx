@@ -19,7 +19,13 @@ export default function UpdateUserPage() {
 
   const updateUser = (id: string | number) => {
     const user = usersQuery.data?.find((user) => user.id === id);
-    if (user) setUpdatedUser({ ...user, id: String(user.id) });
+    if (user) {
+      setUpdatedUser({
+        ...user,
+        id: String(user.id),
+        avatar: user.avatar ? user.avatar : "",
+      });
+    }
   };
 
   const handleSubmit = (event: { preventDefault: () => void }) => {
