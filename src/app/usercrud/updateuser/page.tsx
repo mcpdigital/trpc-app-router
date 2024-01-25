@@ -30,7 +30,7 @@ export default function UpdateUserPage() {
 
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    updateUserMutation.mutate({ id: Number(updatedUser.id), ...updatedUser });
+    updateUserMutation.mutate({ id: updatedUser.id, ...updatedUser });
   };
 
   useEffect(() => {
