@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
-import { GRAD_WITCH } from "../../tw_gradients";
+import { GRAD_WITCH, GRAD_OCEANIC, GRAD_MIDNIGHT } from "../../tw_gradients";
 import { SignedOut, SignedIn, SignInButton } from "@clerk/nextjs";
 import { ButtonGoldS } from "../../twstyles/buttons";
 
@@ -64,21 +64,24 @@ export default function DallE() {
       <SignedIn>
         <div
           className={
-            GRAD_WITCH +
-            "container mx-auto mt-16 h-screen p-2 text-slate-900 dark:text-white"
+            GRAD_MIDNIGHT +
+            "container max-h-[800px] my-4 p-10 shadow-xl mx-6 rounded-xl h-screen text-slate-900 dark:text-white"
           }
         >
-          <h1>Ask DALL-E</h1>
-          <form onSubmit={handleSubmit} className="mt-2 flex flex-col gap-3">
+          <h1 className="text-2xl ">Ask DALL-E</h1>
+          <form
+            onSubmit={handleSubmit}
+            className="mt-2 flex flex-row justify-around gap-3"
+          >
             <textarea
-              className="rounded border border-gray-300 p-2 text-gray-900 dark:bg-slate-800 dark:text-gray-200"
+              className=" w-screen rounded border border-gray-300 p-2 text-gray-900 dark:bg-slate-800 dark:text-gray-200"
               placeholder="Enter your prompt for Dall-E"
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
             ></textarea>
             <button
               type="submit"
-              className="rounded bg-gradient-to-r from-blue-500 to-purple-500 p-2 text-white hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600"
+              className="w-[170px] rounded bg-gradient-to-r from-blue-500 to-purple-500 p-2 text-white hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600"
               // className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
               disabled={isLoading}
             >
