@@ -10,9 +10,13 @@ const Navbar = () => {
   const userRole = checkUserRole(session);
 
   const links = [
-    { title: "Profile", url: "/profile" },
-    { title: "Dashboard", url: "/user" },
-    { title: "Admin Dashboard", url: "/admin", role: "admin" },
+    { title: "Users List", url: "/userlist", role: "org:member" },
+    { title: "TW Gradients", url: "/twgrads", role: "org:member" },
+    { title: "GPT", url: "/gpt", role: "org:ai" },
+    { title: "Profile", url: "/profile", role: "org:member" },
+    { title: "Dashboard", url: "/user", role: "org:member" },
+    { title: "Delete User", url: "/deleteuser", role: "org:admin" },
+    { title: "Admin Dashboard", url: "/admin", role: "org:admin" },
     // Add more placeholder links as needed
   ];
 
@@ -60,7 +64,10 @@ const Navbar = () => {
         <nav className="flex flex-wrap items-center justify-center text-base md:ml-auto md:mr-auto">
           <SignedIn>
             {links.map((link) =>
-              (link.role === "admin" && userRole === "admin") || !link.role ? (
+              link.role === userRole ||
+              userRole === "org:ai" ||
+              userRole === "org:admin" ||
+              !link.role ? (
                 <Link key={link.title} href={link.url}>
                   {/* Use a div instead of an anchor tag */}
                   <div className="mr-5 cursor-pointer hover:text-gray-900 dark:hover:text-gray-100">

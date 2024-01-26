@@ -30,7 +30,11 @@ const FetchApi: React.FC = () => {
   }, []);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="m-auto animate-spin text-center shadow-none rounded-full h-16 w-16 border-t-4 border-r-2  border-b-1 border-l-1 border-blue-500 border-solid">
+        A P I
+      </div>
+    );
   }
 
   if (error) {

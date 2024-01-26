@@ -7,7 +7,7 @@ import Sidebar from "./Sidebar";
 import UsersTable from "./UsersTable";
 import AddUserForm from "./AddUserForm";
 import useUsers from "./useUsers";
-// import Loading from "@components/Loading";
+import Loading from "@/components/Loading";
 import { useOrganizationList } from "@clerk/nextjs"; // Import the useOrganizationList hook
 
 const Admin = () => {
@@ -43,7 +43,7 @@ const Admin = () => {
   // Simulate a 5-second delay before hiding the loader
   useEffect(() => {
     const timer = setTimeout(() => {
-      setShowLoader(false);
+      setShowLoader(true);
     }, 5000);
 
     return () => clearTimeout(timer); // Clear the timer on component unmount
@@ -54,11 +54,14 @@ const Admin = () => {
     if (isLoaded) {
       // Find the admin organization from the loaded organization list
       const adminOrganization = organizationList.find(
-        (org) => org.membership.role !== "admin",
+        (org) => org.membership.role === "org:admin"
       );
 
-      // If the user is not an admin, redirect to the homepage
-      if (!adminOrganization || adminOrganization.membership.role === "admin") {
+      // If the user is not an admin, redirect to the homepage EU MUDEI O CERTO EH NOT EQUAL
+      if (
+        !adminOrganization ||
+        adminOrganization.membership.role !== "org:admin"
+      ) {
         router.push("/"); // Replace '/' with the homepage URL
       } else {
         // If the user is an admin, no need to wait for organization list, directly render the admin page
@@ -69,7 +72,7 @@ const Admin = () => {
 
   // Get the organization details of the admin
   const adminOrganization = isLoaded
-    ? organizationList.find((org) => org.membership.role !== "admin")
+    ? organizationList.find((org) => org.membership.role === "org:admin")
     : null;
 
   // Set the admin details
@@ -84,9 +87,9 @@ const Admin = () => {
     : "/admin.jpeg"; // Replace with the default admin image URL or any other fallback image
 
   // Render the loader while waiting for organization data to load
-  // if (showLoader) {
-  //   return <Loading />;
-  // }
+  if (showLoader) {
+    return <Loading />;
+  }
 
   // Render the admin page if the user's role is "admin"
   return (
