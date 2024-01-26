@@ -4,13 +4,13 @@ import type { GHApiResponse } from "../../types/types"; // Import ApiResponse in
 
 interface UserCardProps {
   user: GHApiResponse; // Pass a single user data to the component
-  tw_string: GHApiResponse; // Pass a string with Tailwind classes to the component
+  tw_string?: string; // Pass a string with Tailwind classes to the component
 }
 
 const UserCard = ({ user, tw_string }: UserCardProps) => {
   return (
     <div className={" m-auto mb-4 " + tw_string}>
-      GITHUB
+      {tw_string} GITHUB
       <h2 className=" mt-2 mb-2 text-lg font-semibold">{user.login}</h2>
       <Image
         src={user.avatar_url}
