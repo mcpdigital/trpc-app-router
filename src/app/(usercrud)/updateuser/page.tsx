@@ -52,11 +52,14 @@ export default function UpdateUserPage() {
   }
 
   return (
-    <div className="flex flex-col text-center ">
+    <div
+      className="flex flex-col text-center p-2 border border-slate-950 m-4 rounded-2xl"
+      style={{ minHeight: "calc(85vh - 60px)" }}
+    >
       <h1 className="p-4 text-4xl">Update User</h1>
       <table
         id="userstable"
-        className="dark:text-slate-300 m-2 rounded-lg dark:bg-slate-900 mx-screen pt-5  pb-1"
+        className="dark:text-slate-300 m-2 rounded-lg dark:bg-slate-900 mx-screen pt-1  pb-1"
       >
         <thead>
           <tr>

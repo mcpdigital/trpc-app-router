@@ -26,7 +26,10 @@ export default function DeleteUserPage() {
   }
 
   return (
-    <div className="flex flex-col ">
+    <div
+      className="flex flex-col p-2 border border-slate-950 m-4 rounded-2xl"
+      style={{ minHeight: "calc(85vh - 60px)" }}
+    >
       <h1 className="p-4 text-4xl">Delete User</h1>
       <table
         id="userstable"

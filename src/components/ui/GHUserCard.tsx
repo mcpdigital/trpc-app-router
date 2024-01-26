@@ -4,12 +4,14 @@ import type { GHApiResponse } from "../../types/types"; // Import ApiResponse in
 
 interface UserCardProps {
   user: GHApiResponse; // Pass a single user data to the component
+  tw_string: string;
 }
 
-const UserCard = ({ user }: UserCardProps) => {
+const UserCard = ({ user, tw_string }: UserCardProps) => {
   return (
-    <div className="m-auto mb-4 h-[350px] w-[250px] break-inside-avoid break-words rounded-xl p-6 text-center text-slate-300 shadow-lg dark:bg-slate-800">
-      <h2 className="mb-2 text-lg font-semibold">{user.login}</h2>
+    <div className={" m-auto mb-4 " + tw_string}>
+      GITHUB
+      <h2 className=" mt-2 mb-2 text-lg font-semibold">{user.login}</h2>
       <Image
         src={user.avatar_url}
         alt={`Image for ${user.login}`}

@@ -20,11 +20,22 @@ export default function UserListPage() {
   }
 
   return (
-    <div className=" flex flex-col text-center">
-      <h1 className="p-4 text-4xl">All Users</h1>
+    <div
+      className="flex flex-col border border-black m-4 rounded-2xl "
+      style={{ minHeight: "calc(85vh - 60px)" }}
+    >
+      <h1 className="p-4 text-4xl text-center">All Users</h1>
+      <div className="flex flex-row p-2 mx-4 justify-around">
+        <p className="">NAME</p>
+        <p className="">EMAIL</p>
+      </div>
+
       {usersQuery.data.map((user) => (
-        <div key={user.id}>
-          <p>{user.name}</p>
+        <div
+          className="p-2 border border-gray-700  mx-4 flex flex-row gap-4 justify-between text-left "
+          key={user.id}
+        >
+          <p className="font-semibold">{user.name}</p>
           <p>{user.email}</p>
         </div>
       ))}

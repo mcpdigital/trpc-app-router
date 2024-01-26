@@ -42,9 +42,17 @@ const FetchApi: React.FC = () => {
   }
   // The key bellow is needed when maping multiple users REACT maps it, so since each user have an id, a single user can pass it too anyway
   return (
-    <div className={GRAD_GOTHAN_TB + " flex flex-row gap-2 p-4"}>
+    <div className=" ">
       <div className="">
-        <UserCard key={data.id} user={data} />
+        <UserCard
+          key={data.id}
+          user={data}
+          tw_string={
+            " h-[350px] w-[250px] rounded-xl p-6 text-center dark:text-slate-300 text-slate-800 shadow-2xl dark: " +
+            GRAD_GOTHAN_TB +
+            " bg-slate-400"
+          }
+        />
       </div>
     </div>
   );
