@@ -4,7 +4,7 @@ import type { GHApiResponse } from "../../types/types"; // Import ApiResponse in
 
 interface UserCardProps {
   user: GHApiResponse; // Pass a single user data to the component
-  tw_string: string;
+  tw_string: GHApiResponse; // Pass a string with Tailwind classes to the component
 }
 
 const UserCard = ({ user, tw_string }: UserCardProps) => {
