@@ -10,7 +10,7 @@ interface UserCardProps {
 const UserCard = ({ user, tw_string }: UserCardProps) => {
   return (
     <div className={" m-auto mb-4 " + tw_string}>
-      {tw_string} GITHUB
+      GITHUB
       <h2 className=" mt-2 mb-2 text-lg font-semibold">{user.login}</h2>
       <Image
         src={user.avatar_url}
