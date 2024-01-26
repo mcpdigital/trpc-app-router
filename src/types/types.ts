@@ -20,6 +20,7 @@ export interface GHApiResponse {
   received_events_url: string;
   type: string;
   site_admin: boolean;
+  tw_string: string;
 }
 export interface WPApiResponse {
   id: number;
