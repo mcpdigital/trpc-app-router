@@ -15,7 +15,7 @@ function checkUserRole(session) {
   // Loop through all organization memberships
   for (const membership of organizationMemberships) {
     if (membership.role) {
-      console.log("ROLE HERE --> ", membership.role.toLowerCase());
+      // console.log("ROLE HERE --> ", membership.role.toLowerCase());
       return membership.role.toLowerCase(); // Return the role in lowercase if it exists
     }
   }

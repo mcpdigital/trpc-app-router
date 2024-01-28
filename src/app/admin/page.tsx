@@ -1,38 +1,23 @@
 // Import necessary modules and components
 "use client";
-import React, { useEffect, useState } from "react"; // Added useState
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Sidebar from "./Sidebar";
-import UsersTable from "./UsersTable";
+//import UsersTable from "./UsersTable";
 import AddUserForm from "./AddUserForm";
-import useUsers from "./useUsers";
+//import useUsers from "./useUsers";
 import Loading from "@/components/Loading";
-import { useOrganizationList } from "@clerk/nextjs"; // Import the useOrganizationList hook
-
+import { useOrganizationList, useUser } from "@clerk/nextjs";
 const Admin = () => {
-  // Dummy user data for the user table
-  const initialUsers = [
-    {
-      id: 1,
-      name: "John Doe",
-      email: "john@example.com",
-      role: "User",
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      email: "jane@example.com",
-      role: "User",
-    },
-    // Add more dummy user data as needed
-  ];
-
   // Initialize the useUsers hook to manage user data
-  const { users, addUser, deleteUser } = useUsers(initialUsers);
+  const { users, addUser, deleteUser } = useUser();
 
   // Organization data
   const { organizationList, isLoaded, setActive } = useOrganizationList();
+
+  // User data
+  //const { userList } = useUserList();
 
   // Next.js router
   const router = useRouter();
@@ -43,8 +28,8 @@ const Admin = () => {
   // Simulate a 5-second delay before hiding the loader
   useEffect(() => {
     const timer = setTimeout(() => {
-      setShowLoader(true);
-    }, 5000);
+      setShowLoader(false);
+    }, 2000);
 
     return () => clearTimeout(timer); // Clear the timer on component unmount
   }, []);
@@ -57,18 +42,15 @@ const Admin = () => {
         (org) => org.membership.role === "org:admin"
       );
 
-      // If the user is not an admin, redirect to the homepage EU MUDEI O CERTO EH NOT EQUAL
+      // If the user is not an admin, redirect to the homepage
       if (
         !adminOrganization ||
         adminOrganization.membership.role !== "org:admin"
       ) {
         router.push("/"); // Replace '/' with the homepage URL
-      } else {
-        // If the user is an admin, no need to wait for organization list, directly render the admin page
-        setShowLoader(false);
       }
     }
-  }, [isLoaded, organizationList]);
+  }, []);
 
   // Get the organization details of the admin
   const adminOrganization = isLoaded
@@ -106,8 +88,8 @@ const Admin = () => {
         </div>
         {/* Admin Image */}
         <Image width={300} height={300} src={adminImageUrl} alt="Admin" />
-        {/* Users Table */}
-        <UsersTable users={users} deleteUser={deleteUser} />
+        {/* Users Table <UsersTable users={userList} deleteUser={deleteUser} />*/}
+
         {/* Add User Form */}
         <div className="flex w-1/2 flex-col rounded-lg p-4 dark:bg-slate-800">
           <AddUserForm addUser={addUser} />
