@@ -11,7 +11,6 @@ import Loading from "@/components/Loading";
 import { useOrganizationList, useUser } from "@clerk/nextjs";
 const Admin = () => {
   // Initialize the useUsers hook to manage user data
-  const { users, addUser, deleteUser } = useUser();
 
   // Organization data
   const { organizationList, isLoaded, setActive } = useOrganizationList();
