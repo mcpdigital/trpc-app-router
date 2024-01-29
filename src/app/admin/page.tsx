@@ -90,9 +90,7 @@ const Admin = () => {
         {/* Users Table <UsersTable users={userList} deleteUser={deleteUser} />*/}
 
         {/* Add User Form */}
-        <div className="flex w-1/2 flex-col rounded-lg p-4 dark:bg-slate-800">
-          <AddUserForm addUser={addUser} />
-        </div>
+        <div className="flex w-1/2 flex-col rounded-lg p-4 dark:bg-slate-800"></div>
       </div>
     </div>
   );
