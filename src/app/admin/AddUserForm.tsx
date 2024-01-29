@@ -1,7 +1,7 @@
 // AddUserForm.jsx
 import React, { useState } from "react";
 
-const AddUserForm = ({ addUser }) => {
+const AddUserForm = ({ addUser }: { addUser: (user: any) => void }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
