@@ -10,14 +10,39 @@ const Navbar = () => {
   const userRole = checkUserRole(session);
 
   const links = [
-    { title: "Users List", url: "/userlist", role: "org:member" },
-    { title: "TW Gradients", url: "/twgrads", role: "org:member" },
-    { title: "GPT", url: "/gpt", role: "org:ai" },
     { title: "Profile", url: "/profile", role: "org:member" },
     { title: "Dashboard", url: "/user", role: "org:member" },
-    { title: "Delete User", url: "/deleteuser", role: "org:admin" },
     { title: "Admin Dashboard", url: "/admin", role: "org:admin" },
     // Add more placeholder links as needed
+  ];
+
+  const groupedLinks = [
+    {
+      title: "HTML & CSS",
+      links: [
+        { title: "TW Gradients", url: "/twgrads", role: "" },
+        { title: "ui-assets", url: "/ui-assets", role: "" },
+      ],
+      role: "",
+    },
+    {
+      title: "OpenAI",
+      links: [
+        { title: "GPT", url: "/gpt", role: "org:ai" },
+        { title: "DALL-E", url: "/DALL-E", role: "org:ai" },
+      ],
+      role: "org:ai",
+    },
+    {
+      title: "Users",
+      links: [
+        { title: "Users List", url: "/userlist", role: "org:member" },
+        { title: "Delete User", url: "/deleteuser", role: "org:admin" },
+        { title: "Create User", url: "/createuser", role: "org:admin" },
+        { title: "Update User", url: "/updateuser", role: "org:admin" },
+      ],
+      role: "org:admin",
+    },
   ];
 
   return (
@@ -62,21 +87,54 @@ const Navbar = () => {
           </a>
         </div>
         <nav className="flex flex-wrap items-center justify-center text-base md:ml-auto md:mr-auto">
-          <SignedIn>
-            {links.map((link) =>
-              link.role === userRole ||
-              userRole === "org:ai" ||
-              userRole === "org:admin" ||
-              !link.role ? (
+          {links.map(
+            (link) =>
+              (link.role.includes(userRole) ||
+                userRole?.includes("org:admin") ||
+                !link.role.length) && (
                 <Link key={link.title} href={link.url}>
                   {/* Use a div instead of an anchor tag */}
                   <div className="mr-5 cursor-pointer hover:text-gray-900 dark:hover:text-gray-100">
                     {link.title}
                   </div>
                 </Link>
-              ) : null
-            )}
-          </SignedIn>
+              )
+          )}
+          {groupedLinks.map(
+            (group) =>
+              group.links.some(
+                (link) =>
+                  link.role.includes(userRole) ||
+                  userRole?.includes("org:admin") ||
+                  !link.role.length
+              ) && (
+                <div key={group.title} className="relative group">
+                  <p className="mr-5 cursor-pointer hover:text-gray-900 dark:hover:text-gray-100">
+                    {group.title}
+                  </p>
+                  <ul className="absolute hidden w-[180px] mt--1 space-y-2 bg-white rounded-md shadow-lg dark:bg-gray-800 dark:text-gray-300  group-hover:block ">
+                    {group.links.map(
+                      (link) =>
+                        (link.role.includes(userRole) ||
+                          userRole?.includes("org:admin") ||
+                          !link.role.length) && (
+                          <li
+                            key={link.title}
+                            className="px-4 py-2  dark:hover:bg-gray-700"
+                          >
+                            <Link
+                              className="hover:text-gray-900 dark:hover:text-gray-100 block"
+                              href={link.url}
+                            >
+                              {link.title}
+                            </Link>
+                          </li>
+                        )
+                    )}
+                  </ul>
+                </div>
+              )
+          )}
         </nav>
         <div className="items-center md:flex">
           <SignedOut>
