@@ -10,9 +10,8 @@ const Navbar = () => {
   const userRole = checkUserRole(session);
 
   const links = [
-    { title: "Profile", url: "/profile", role: "org:member" },
-    { title: "Dashboard", url: "/user", role: "org:member" },
     { title: "Admin Dashboard", url: "/admin", role: "org:admin" },
+
     // Add more placeholder links as needed
   ];
 
@@ -30,6 +29,14 @@ const Navbar = () => {
       links: [
         { title: "GPT", url: "/gpt", role: "org:ai" },
         { title: "DALL-E", url: "/DALL-E", role: "org:ai" },
+      ],
+      role: "org:ai",
+    },
+    {
+      title: "Clerk",
+      links: [
+        { title: "Profile", url: "/profile", role: "org:member" },
+        { title: "Dashboard", url: "/dashboard", role: "org:member" },
       ],
       role: "org:ai",
     },
@@ -52,8 +59,8 @@ const Navbar = () => {
         GRAD_GOTHAN_TB
       }
     >
-      <div className="container mx-auto flex flex-col flex-wrap items-center justify-between p-5 md:flex-row">
-        <div className="flex items-center">
+      <div className="container md:mx-auto flex  flex-wrap md:items-center justify-between p-5 md:flex-wrap md:items-left md:justify-between md:p-5 md:flex-row">
+        <div className="flex md:items-center">
           <a
             href="/"
             className="title-font flex items-center font-medium text-gray-900"
@@ -86,7 +93,31 @@ const Navbar = () => {
             <span className="dark:text-gray-400 ml-3 text-xl">MCP Digital</span>
           </a>
         </div>
-        <nav className="flex flex-wrap items-center justify-center text-base md:ml-auto md:mr-auto">
+        {/* Hamburger Menu */}
+        <div className="md:hidden">
+          <button
+            className=" flex flex-col items-left md:items-center px-3 py-2 border rounded text-gray-700 border-gray-700 hover:text-gray-900 hover:border-gray-900 dark:text-gray-300 dark:border-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 focus:outline-none focus:shadow-outline-blue active:bg-gray-200 dark:active:bg-gray-700 dark:hover:border-gray-100"
+            onClick={() =>
+              document.getElementById("nav").classList.toggle("hidden")
+            }
+          >
+            <svg
+              className="h-3 w-3"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+          </button>
+        </div>
+        <nav
+          id="nav"
+          className="flex flex-col md:flex-row  md:items-start text-base md:ml-auto md:mr-auto flex-hidden md:flex "
+        >
           {links.map(
             (link) =>
               (link.role.includes(userRole) ||
@@ -94,7 +125,7 @@ const Navbar = () => {
                 !link.role.length) && (
                 <Link key={link.title} href={link.url}>
                   {/* Use a div instead of an anchor tag */}
-                  <div className="mr-5 cursor-pointer hover:text-gray-900 dark:hover:text-gray-100">
+                  <div className="mr-5 cursor-pointer hover:text-gray-900 dark:hover:text-gray-100 ">
                     {link.title}
                   </div>
                 </Link>
@@ -112,7 +143,7 @@ const Navbar = () => {
                   <p className="mr-5 cursor-pointer hover:text-gray-900 dark:hover:text-gray-100">
                     {group.title}
                   </p>
-                  <ul className="absolute hidden w-[180px] mt--1 space-y-2 bg-white rounded-md shadow-lg dark:bg-gray-800 dark:text-gray-300  group-hover:block ">
+                  <ul className="absolute hidden w-[140px] mt--1 text-sm space-y-2 bg-white rounded-md shadow-lg dark:bg-gray-800 dark:text-gray-300  group-hover:block ">
                     {group.links.map(
                       (link) =>
                         (link.role.includes(userRole) ||
@@ -120,10 +151,10 @@ const Navbar = () => {
                           !link.role.length) && (
                           <li
                             key={link.title}
-                            className="px-4 py-2  dark:hover:bg-gray-700"
+                            className="px-4 py-2  dark:hover:bg-gray-700 dark:hover:text-gray-200 dark:text-gray-200 rounded-md "
                           >
                             <Link
-                              className="hover:text-gray-900 dark:hover:text-gray-100 block"
+                              className="hover:text-gray-900 text-gray-200 dark:hover:text-gray-100 w-full h-full transition duration-150 ease-in-out rounded-md dark:text-gray-300"
                               href={link.url}
                             >
                               {link.title}
@@ -150,8 +181,9 @@ const Navbar = () => {
             </a>
           </SignedOut>
           <SignedIn>
-            <div className="ml-4">
+            <div className="ml-4 flex flex-col items-center text-[10px]">
               <UserButton afterSignOutUrl="/" />
+              <p className="mt-1">{userRole}</p>
             </div>
           </SignedIn>
         </div>
