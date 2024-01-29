@@ -11,7 +11,6 @@ const Admin = () => {
   const { organizationList, isLoaded, setActive } = useOrganizationList();
   const router = useRouter();
   const [showLoader, setShowLoader] = useState(true);
-  const { users, addUser, deleteUser } = useUser();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -53,9 +52,7 @@ const Admin = () => {
             </div>
           ))}
         </div>
-        <div className="flex w-1/2 flex-col rounded-lg p-4 dark:bg-slate-800">
-          <AddUserForm addUser={addUser} />
-        </div>
+        <div className="flex w-1/2 flex-col rounded-lg p-4 dark:bg-slate-800"></div>
       </div>
     </div>
   );
