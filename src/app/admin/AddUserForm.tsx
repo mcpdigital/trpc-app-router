@@ -5,7 +5,7 @@ const AddUserForm = ({ addUser }: { addUser: (user: any) => void }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const newUser = {
       id: new Date().getTime(), // Use a unique ID (can be generated differently in production)
