@@ -5,21 +5,21 @@ import { z } from "zod";
 import { UpdateUserData } from "./../../../types/types";
 
 const geoSchema = z.object({
-  lat: z.string(),
-  lng: z.string(),
+  lat: z.string().optional(),
+  lng: z.string().optional(),
 });
 
 const addressSchema = z.object({
-  street: z.string(),
-  suite: z.string(),
-  city: z.string(),
-  zipcode: z.string(),
+  street: z.string().optional(),
+  suite: z.string().optional(),
+  city: z.string().optional(),
+  zipcode: z.string().optional(),
   geo: geoSchema,
 });
 
 const companySchema = z.object({
-  companyName: z.string(),
-  catchPhrase: z.string(),
+  companyName: z.string().optional(),
+  catchPhrase: z.string().optional(),
   bs: z.string(),
 });
 
