@@ -6,7 +6,7 @@ import { UpdateUserData } from "@/types/types";
 export default function UpdateUserPage() {
   const [updatedUser, setUpdatedUser] = useState<UpdateUserData | null>(null);
   const usersQuery = trpc.userData.getUserData.useQuery();
-  const updateUserMutation = trpc.users.updateUser.useMutation();
+  const updateUserMutation = trpc.userData.updateUserData.useMutation();
 
   // Handle input change
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,7 +37,7 @@ export default function UpdateUserPage() {
   // Handle submit
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    const id = updatedUser?.id; // Use the id from updatedUser
+    const id = updatedUser?.id;
     updateUserMutation.mutate({ id: Number(id), ...updatedUser });
   };
 

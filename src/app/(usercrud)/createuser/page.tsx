@@ -7,7 +7,7 @@ import { CreateUserData } from "@/types/types";
 export default function CreateUserPage() {
   const [newUser, setNewUser] = useState<CreateUserData>({} as CreateUserData);
 
-  const createUserMutation = trpc.users.createUser.useMutation();
+  const createUserMutation = trpc.userData.createUserData.useMutation();
 
   const createUser = () => {
     if (!newUser.name || !newUser.email) {

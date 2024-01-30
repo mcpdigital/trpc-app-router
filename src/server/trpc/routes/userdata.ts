@@ -68,6 +68,7 @@ export const userDataRouter = router({
     .mutation(async ({ input }) => {
       return await prisma.user.create({
         data: {
+          id: input.id,
           name: input.name,
           username: input.username,
           email: input.email,

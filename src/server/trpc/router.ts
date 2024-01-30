@@ -8,7 +8,7 @@ export const appRouter = router({
     return "OK";
   }),
   todos: todoRouter,
-  users: userRouter, // add userRouter to appRouter
+  //users: userRouter, // add userRouter to appRouter
   userData: userDataRouter,
 });
 

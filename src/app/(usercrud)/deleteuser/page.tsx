@@ -4,8 +4,8 @@ import { useEffect } from "react";
 import { trpc } from "@/lib/trpc/trpc-client";
 
 export default function DeleteUserPage() {
-  const usersQuery = trpc.users.getUsers.useQuery();
-  const deleteUserMutation = trpc.users.deleteUser.useMutation();
+  const usersQuery = trpc.userData.getUserData.useQuery();
+  const deleteUserMutation = trpc.userData.deleteUserData.useMutation();
 
   const deleteUser = (id: number) => {
     deleteUserMutation.mutate({ id: Number(id) });
