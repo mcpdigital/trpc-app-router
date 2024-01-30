@@ -6,8 +6,33 @@ import { CreateUserData } from "@/types/types";
 
 export default function CreateUserPage() {
   const [newUser, setNewUser] = useState<CreateUserData>({} as CreateUserData);
-
   const createUserMutation = trpc.userData.createUserData.useMutation();
+
+  // Handle input change
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setNewUser((prevState) => {
+      const keys = name.split(".");
+      if (!prevState) {
+        throw new Error("prevState is null");
+      } else {
+        if (keys.length === 1) {
+          return { ...prevState, [name]: value } as CreateUserData;
+        } else {
+          return {
+            ...prevState,
+            [keys[0]]: {
+              ...((prevState[keys[0] as keyof CreateUserData] as Record<
+                string,
+                any
+              >) || {}),
+              [keys[1]]: value,
+            },
+          } as CreateUserData;
+        }
+      }
+    });
+  };
 
   const createUser = () => {
     if (!newUser.name || !newUser.email) {
@@ -41,7 +66,7 @@ export default function CreateUserPage() {
             className="dark:text-slate-900 p-2"
             type="text"
             value={newUser.name}
-            onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
+            onChange={handleInputChange}
             placeholder="Name"
             autoComplete="off"
           />
@@ -50,9 +75,7 @@ export default function CreateUserPage() {
             className="dark:text-slate-900 p-2"
             type="text"
             value={newUser.username}
-            onChange={(e) =>
-              setNewUser({ ...newUser, username: e.target.value })
-            }
+            onChange={handleInputChange}
             placeholder="Username"
             autoComplete="off"
           />
@@ -61,7 +84,7 @@ export default function CreateUserPage() {
             className="dark:text-slate-900 p-2"
             type="text"
             value={newUser.email}
-            onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
+            onChange={handleInputChange}
             placeholder="Email"
             autoComplete="off"
           />
@@ -70,12 +93,7 @@ export default function CreateUserPage() {
             className="dark:text-slate-900 p-2"
             type="text"
             value={newUser.address?.street}
-            onChange={(e) =>
-              setNewUser({
-                ...newUser,
-                address: { ...newUser.address, street: e.target.value },
-              })
-            }
+            onChange={handleInputChange}
             placeholder="Street"
             autoComplete="off"
           />
@@ -86,7 +104,7 @@ export default function CreateUserPage() {
             className="dark:text-slate-900 p-2"
             type="text"
             value={newUser.avatar}
-            onChange={(e) => setNewUser({ ...newUser, avatar: e.target.value })}
+            onChange={handleInputChange}
             placeholder="Avatar"
             autoComplete="off"
           />
