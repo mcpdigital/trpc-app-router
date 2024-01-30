@@ -25,13 +25,13 @@ const companySchema = z.object({
 
 const createUserDataSchema = z.object({
   name: z.string(),
-  username: z.string(),
+  username: z.string().optional(),
   email: z.string(),
-  address: addressSchema,
-  phone: z.string(),
-  website: z.string(),
-  avatar: z.string(),
-  company: companySchema,
+  address: addressSchema.optional(),
+  phone: z.string().optional(),
+  website: z.string().optional(),
+  avatar: z.string().optional(),
+  company: companySchema.optional(),
 });
 
 const updateUserDataSchema = z.object({

@@ -2,20 +2,29 @@
 // src/app/usercrud/createuser/page.tsx
 import { useState } from "react";
 import { trpc } from "@/lib/trpc/trpc-client";
+import { CreateUserData } from "@/types/types";
 
 export default function CreateUserPage() {
-  const [newUser, setNewUser] = useState({
-    name: "",
-    email: "",
-
-    avatar: "",
-  });
+  const [newUser, setNewUser] = useState<CreateUserData>({} as CreateUserData);
 
   const createUserMutation = trpc.users.createUser.useMutation();
 
   const createUser = () => {
+    if (!newUser.name || !newUser.email) {
+      // Show an error message to the user
+      console.error("Name and email are required");
+      return;
+    }
+
+    console.log("Creating user with data:", newUser);
     createUserMutation.mutate(newUser, {
-      onSuccess: () => setNewUser({ name: "", email: "", avatar: "" }),
+      onSuccess: (data) => {
+        console.log("Success data:", data);
+        setNewUser({} as CreateUserData);
+      },
+      onError: (error) => {
+        console.log("Error:", error);
+      },
     });
   };
 
@@ -36,6 +45,18 @@ export default function CreateUserPage() {
             placeholder="Name"
             autoComplete="off"
           />
+
+          <input
+            className="dark:text-slate-900 p-2"
+            type="text"
+            value={newUser.username}
+            onChange={(e) =>
+              setNewUser({ ...newUser, username: e.target.value })
+            }
+            placeholder="Username"
+            autoComplete="off"
+          />
+
           <input
             className="dark:text-slate-900 p-2"
             type="text"
@@ -44,28 +65,33 @@ export default function CreateUserPage() {
             placeholder="Email"
             autoComplete="off"
           />
+
           <input
-            className="dark:text-slate-900"
-            type="password"
-            value={newUser.password}
+            className="dark:text-slate-900 p-2"
+            type="text"
+            value={newUser.address?.street}
             onChange={(e) =>
-              setNewUser({ ...newUser, password: e.target.value })
+              setNewUser({
+                ...newUser,
+                address: { ...newUser.address, street: e.target.value },
+              })
             }
-            placeholder="Password"
+            placeholder="Street"
             autoComplete="off"
           />
+
+          {/* Add more inputs for other fields in a similar way */}
+
           <input
-            className="dark:text-slate-900"
+            className="dark:text-slate-900 p-2"
             type="text"
             value={newUser.avatar}
             onChange={(e) => setNewUser({ ...newUser, avatar: e.target.value })}
-            placeholder="Avatar URL (optional)"
+            placeholder="Avatar"
             autoComplete="off"
           />
-          <button
-            className="dark:bg-slate-800 min-w-[84px] rounded-md hover:cursor-pointer hover:bg-slate-900 active:bg-slate-950  text-slate-100 p-2"
-            onClick={createUser}
-          >
+
+          <button onClick={createUser} className="dark:text-slate-900 p-2">
             Create User
           </button>
         </form>
