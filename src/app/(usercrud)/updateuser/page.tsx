@@ -1,33 +1,37 @@
 "use client";
 import { useState, useEffect } from "react";
 import { trpc } from "@/lib/trpc/trpc-client";
+import { UpdateUserData } from "@/types/types";
 
 export default function UpdateUserPage() {
-  const [updatedUser, setUpdatedUser] = useState({
-    id: "",
-    name: "",
-    email: "",
-    password: "",
-    avatar: "",
-  });
-  const usersQuery = trpc.users.getUsers.useQuery();
+  const [updatedUser, setUpdatedUser] = useState<UpdateUserData | null>(null);
+  const usersQuery = trpc.userData.getUserData.useQuery();
   const updateUserMutation = trpc.users.updateUser.useMutation();
 
   // Handle input change
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUpdatedUser({ ...updatedUser, [event.target.name]: event.target.value });
-  };
-
-  // Update user
-  const updateUser = (id: string) => {
-    const user = usersQuery.data?.find((user) => user.id === Number(id));
-    if (user) {
-      setUpdatedUser({
-        ...user,
-        id: user.id.toString(),
-        avatar: user.avatar ? user.avatar : "",
-      });
-    }
+    const { name, value } = event.target;
+    setUpdatedUser((prevState) => {
+      const keys = name.split(".");
+      if (!prevState) {
+        throw new Error("prevState is null");
+      } else {
+        if (keys.length === 1) {
+          return { ...prevState, [name]: value } as UpdateUserData;
+        } else {
+          return {
+            ...prevState,
+            [keys[0]]: {
+              ...((prevState[keys[0] as keyof UpdateUserData] as Record<
+                string,
+                any
+              >) || {}),
+              [keys[1]]: value,
+            },
+          } as UpdateUserData;
+        }
+      }
+    });
   };
 
   // Handle submit
@@ -47,55 +51,59 @@ export default function UpdateUserPage() {
     return <div>Loading...</div>;
   }
 
-  if (usersQuery.isError) {
-    return <div>Error: {usersQuery.error.message}</div>;
-  }
-
   return (
-    <div
-      className="flex flex-col text-center p-2 border border-slate-950 m-4 rounded-2xl"
-      style={{ minHeight: "calc(85vh - 60px)" }}
-    >
-      <h1 className="p-4 text-4xl">Update User</h1>
-      <table
-        id="userstable"
-        className="dark:text-slate-300 m-2 rounded-lg dark:bg-slate-900 mx-screen pt-1  pb-1"
-      >
-        <thead>
+    <div className="dark:text-slate-300 dark:bg-slate-700 mt-4 p-4 rounded-lg gap-4  flex flex-col ">
+      <table className="table-auto w-full">
+        <thead className="items-left">
           <tr>
-            <th>ID</th>
             <th>Name</th>
+            <th>Username</th>
             <th>Email</th>
-            <th>Action</th>
+            <th>Phone</th>
+            <th>Website</th>
+            <th>Avatar</th>
           </tr>
         </thead>
         <tbody>
-          {usersQuery.data.map((user) => (
+          {usersQuery.data?.map((user) => (
             <tr key={user.id}>
-              <td>{user.id}</td>
               <td>{user.name}</td>
+              <td>{user.username}</td>
               <td>{user.email}</td>
+              <td>{user.phone}</td>
+              <td>{user.website}</td>
+              <td>{user.avatar}</td>
+
               <td>
-                <button onClick={() => updateUser(user.id.toString())}>
-                  Update
-                </button>
+                <button onClick={() => setUpdatedUser(user)}>Edit</button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      {updatedUser && (
-        <form
-          onSubmit={handleSubmit}
-          className="dark:text-slate-300 dark:bg-slate-700 mt-4 p-4 rounded-lg gap-4  mx-auto flex flex-col "
-        >
+      <form
+        onSubmit={handleSubmit}
+        className="dark:text-slate-300 dark:bg-slate-700 mt-4 p-4 rounded-lg gap-4  mx-auto flex flex-col "
+      >
+        <h2 className="text-2xl mb-4">Update User</h2>
+        <div className="grid grid-cols-2 gap-4">
           <label>
             Name:
             <input
               className="dark:text-slate-900 stretch ml-1 "
               type="text"
               name="name"
-              value={updatedUser.name}
+              value={updatedUser?.name}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            Username:
+            <input
+              className="dark:text-slate-900 stretch ml-1 "
+              type="text"
+              name="username"
+              value={updatedUser?.username}
               onChange={handleInputChange}
             />
           </label>
@@ -105,19 +113,125 @@ export default function UpdateUserPage() {
               className="dark:text-slate-900  stretch ml-1 "
               type="text"
               name="email"
-              value={updatedUser.email}
+              value={updatedUser?.email}
               onChange={handleInputChange}
             />
           </label>
-          <div>
+          <label>
+            Phone:
             <input
-              type="submit"
-              className="dark:bg-slate-800 rounded-md hover:cursor-pointer hover:bg-slate-900 active:bg-slate-950  text-slate-100 p-2"
-              value="Submit"
+              className="dark:text-slate-900  stretch ml-1 "
+              type="text"
+              name="phone"
+              value={updatedUser?.phone}
+              onChange={handleInputChange}
             />
-          </div>
-        </form>
-      )}
+          </label>
+          <label>
+            Website:
+            <input
+              className="dark:text-slate-900  stretch ml-1 "
+              type="text"
+              name="website"
+              value={updatedUser?.website}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            Avatar:
+            <input
+              className="dark:text-slate-900  stretch ml-1 "
+              type="text"
+              name="avatar"
+              value={updatedUser?.avatar}
+              onChange={handleInputChange}
+            />
+          </label>
+        </div>
+        <h2 className="text-2xl mt-4 mb-4">Address</h2>
+        <div className="grid grid-cols-2 gap-4">
+          <label>
+            Street:
+            <input
+              className="dark:text-slate-900 stretch ml-1 "
+              type="text"
+              name="street"
+              value={updatedUser?.address?.street}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            Suite:
+            <input
+              className="dark:text-slate-900 stretch ml-1 "
+              type="text"
+              name="suite"
+              value={updatedUser?.address?.suite}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            City:
+            <input
+              className="dark:text-slate-900 stretch ml-1 "
+              type="text"
+              name="city"
+              value={updatedUser?.address?.city}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            Zipcode:
+            <input
+              className="dark:text-slate-900 stretch ml-1 "
+              type="text"
+              name="zipcode"
+              value={updatedUser?.address?.zipcode}
+              onChange={handleInputChange}
+            />
+          </label>
+        </div>
+        <h2 className="text-2xl mt-4 mb-4">Company</h2>
+        <div className="grid grid-cols-2 gap-4">
+          <label>
+            Name:
+            <input
+              className="dark:text-slate-900 stretch ml-1 "
+              type="text"
+              name="companyName"
+              value={updatedUser?.company?.name}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            Catch Phrase:
+            <input
+              className="dark:text-slate-900 stretch ml-1 "
+              type="text"
+              name="catchPhrase"
+              value={updatedUser?.company?.catchPhrase}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            BS:
+            <input
+              className="dark:text-slate-900 stretch ml-1 "
+              type="text"
+              name="bs"
+              value={updatedUser?.company?.bs}
+              onChange={handleInputChange}
+            />
+          </label>
+        </div>
+        <div className="mt-4">
+          <input
+            type="submit"
+            className="dark:bg-slate-800 rounded-md hover:cursor-pointer hover:bg-slate-900 active:bg-slate-950  text-slate-100 p-2"
+            value="Submit"
+          />
+        </div>
+      </form>
     </div>
   );
 }

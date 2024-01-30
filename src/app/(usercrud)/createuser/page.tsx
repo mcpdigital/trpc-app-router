@@ -7,7 +7,7 @@ export default function CreateUserPage() {
   const [newUser, setNewUser] = useState({
     name: "",
     email: "",
-    password: "",
+
     avatar: "",
   });
 
@@ -15,8 +15,7 @@ export default function CreateUserPage() {
 
   const createUser = () => {
     createUserMutation.mutate(newUser, {
-      onSuccess: () =>
-        setNewUser({ name: "", email: "", password: "", avatar: "" }),
+      onSuccess: () => setNewUser({ name: "", email: "", avatar: "" }),
     });
   };
 
