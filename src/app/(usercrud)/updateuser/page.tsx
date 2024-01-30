@@ -37,8 +37,8 @@ export default function UpdateUserPage() {
   // Handle submit
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    const { id, ...rest } = updatedUser;
-    updateUserMutation.mutate({ id: Number(id), ...rest });
+    const id = updatedUser?.id; // Use the id from updatedUser
+    updateUserMutation.mutate({ id: Number(id), ...updatedUser });
   };
 
   useEffect(() => {
