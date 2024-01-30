@@ -52,10 +52,10 @@ export default function UpdateUserPage() {
   }
 
   return (
-    <div className="dark:text-slate-300 dark:bg-slate-700 mt-4 p-4 rounded-lg gap-4  flex flex-col ">
-      <table className="table-auto w-full">
-        <thead className="items-left">
-          <tr>
+    <div className="dark:text-slate-300 border border-black m-4 p-2 rounded-lg  flex flex-col">
+      <table className="table-auto w-full bg-slate-900 table-row p-4 rounded-lg ">
+        <thead className="table-header-group rounded-t-lg h-[50px] ">
+          <tr className=" text-left text-lg rounded-t-lg bg-slate-800  ">
             <th>Name</th>
             <th>Username</th>
             <th>Email</th>
