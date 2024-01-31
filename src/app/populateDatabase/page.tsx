@@ -39,7 +39,7 @@ export default function PopulateDatabase() {
               },
             },
             company: {
-              companyName: user.company?.name ?? "",
+              name: user.company?.name ?? "",
               catchPhrase: user.company?.catchPhrase ?? "",
               bs: user.company?.bs ?? "",
             },
