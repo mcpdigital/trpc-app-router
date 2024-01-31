@@ -69,30 +69,30 @@ export const userDataRouter = router({
       return await prisma.user.create({
         data: {
           name: input.name,
-          username: input?.username,
-          email: input.email,
-          phone: input?.phone,
-          website: input?.website,
+          username: input?.username || "",
+          email: input.email || "",
+          phone: input?.phone || "",
+          website: input?.website || "",
           avatar: `https://avatars.dicebear.com/api/avataaars/${input.username}.svg`,
           address: {
             create: {
-              street: input.address?.street,
-              suite: input.address?.suite,
-              city: input.address?.city,
-              zipcode: input.address?.zipcode,
+              street: input.address?.street || "",
+              suite: input.address?.suite || "",
+              city: input.address?.city || "",
+              zipcode: input.address?.zipcode || "",
               geo: {
                 create: {
-                  lat: input.address?.geo?.lat,
-                  lng: input.address?.geo?.lng,
+                  lat: input.address?.geo?.lat || "",
+                  lng: input.address?.geo?.lng || "",
                 },
               },
             },
           },
           company: {
             create: {
-              name: input.company?.name,
-              catchPhrase: input.company?.catchPhrase,
-              bs: input.company?.bs,
+              name: input.company?.name || "",
+              catchPhrase: input.company?.catchPhrase || "",
+              bs: input.company?.bs || "",
             },
           },
         },
