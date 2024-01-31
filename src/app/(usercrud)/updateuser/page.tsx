@@ -198,7 +198,7 @@ export default function UpdateUserPage() {
             <input
               className="dark:text-slate-900 stretch ml-1 "
               type="text"
-              name="companyName"
+              name="name"
               value={updatedUser?.company?.name}
               onChange={handleInputChange}
             />

@@ -14,13 +14,13 @@ const addressSchema = z.object({
   suite: z.string().optional(),
   city: z.string().optional(),
   zipcode: z.string().optional(),
-  geo: geoSchema,
+  geo: geoSchema.optional(),
 });
 
 const companySchema = z.object({
-  companyName: z.string().optional(),
   catchPhrase: z.string().optional(),
-  bs: z.string(),
+  bs: z.string().optional(),
+  name: z.string().optional(),
 });
 
 const createUserDataSchema = z.object({
@@ -90,7 +90,7 @@ export const userDataRouter = router({
           },
           company: {
             create: {
-              name: input.company?.companyName,
+              name: input.company?.name,
               catchPhrase: input.company?.catchPhrase,
               bs: input.company?.bs,
             },

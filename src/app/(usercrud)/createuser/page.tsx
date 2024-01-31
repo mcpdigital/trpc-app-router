@@ -1,119 +1,179 @@
 "use client";
-// src/app/usercrud/createuser/page.tsx
-import { useState } from "react";
+import { useRef } from "react";
 import { trpc } from "@/lib/trpc/trpc-client";
 import { CreateUserData } from "@/types/types";
 
 export default function CreateUserPage() {
-  const [newUser, setNewUser] = useState<CreateUserData>({} as CreateUserData);
+  const formRef = useRef<HTMLFormElement>(null);
   const createUserMutation = trpc.userData.createUserData.useMutation();
 
-  // Handle input change
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setNewUser((prevState) => {
-      const keys = name.split(".");
-      if (!prevState) {
-        throw new Error("prevState is null");
-      } else {
-        if (keys.length === 1) {
-          return { ...prevState, [name]: value } as CreateUserData;
-        } else {
-          return {
-            ...prevState,
-            [keys[0]]: {
-              ...((prevState[keys[0] as keyof CreateUserData] as Record<
-                string,
-                any
-              >) || {}),
-              [keys[1]]: value,
-            },
-          } as CreateUserData;
-        }
-      }
-    });
-  };
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
 
-  const createUser = () => {
-    if (!newUser.name || !newUser.email) {
-      // Show an error message to the user
-      console.error("Name and email are required");
+    if (!formRef.current) {
       return;
     }
 
-    console.log("Creating user with data:", newUser);
-    createUserMutation.mutate(newUser, {
-      onSuccess: (data) => {
-        console.log("Success data:", data);
-        setNewUser({} as CreateUserData);
-      },
-      onError: (error) => {
-        console.log("Error:", error);
-      },
-    });
+    const formData = new FormData(formRef.current);
+    const newUser: Record<string, any> = {};
+
+    for (let [key, value] of formData.entries()) {
+      let keys = key.split(".");
+      if (keys.length === 1) {
+        newUser[key] = value;
+      } else if (keys.length === 2) {
+        if (!newUser[keys[0]]) {
+          newUser[keys[0]] = {};
+        }
+        newUser[keys[0]][keys[1]] = value;
+      } else if (keys.length === 3) {
+        if (!newUser[keys[0]]) {
+          newUser[keys[0]] = {};
+        }
+        if (!newUser[keys[0]][keys[1]]) {
+          newUser[keys[0]][keys[1]] = {};
+        }
+        newUser[keys[0]][keys[1]][keys[2]] = value;
+      }
+    }
+
+    // Now you can use newUser to make your API call
+    createUserMutation.mutate(newUser as CreateUserData);
   };
 
   return (
-    <div
-      className="flex flex-col items-center text-center bg-slate-800  border border-black m-4 rounded-2xl"
-      style={{ minHeight: "calc(85vh - 60px)" }}
-    >
-      <h1 className="text-3xl">Create User</h1>
-      <div className="dark:text-slate-300  dark:bg-slate-900 pt-5 px-4 py-2 border border-slate-950 m-4 rounded-2xl  pb-1 flex-col items-center flex justify-center w-full sm:w-1/2 max-w-[440px] min-w-[440px] sm:min-w-[440px]  ">
-        <form className="dark:text-slate-300 dark:bg-slate-700 mb-4 w-full  sm:max-w-[400px] px-4 py-4 rounded-lg gap-4 grid grid-cols ">
-          <span className="text-xl"> Enter user details</span>
-          <input
-            className="dark:text-slate-900 p-2"
-            type="text"
-            value={newUser.name}
-            onChange={handleInputChange}
-            placeholder="Name"
-            autoComplete="off"
-          />
+    <div className="flex flex-col mx-auto mt-4 p-4 items-center dark:text-slate-200">
+      <form
+        ref={formRef}
+        onSubmit={handleSubmit}
+        className="dark:text-slate-300 dark:bg-slate-700 mt-4 p-4 rounded-lg gap-4  mx-auto flex flex-col "
+      >
+        <input
+          className="dark:text-slate-900 p-2"
+          type="text"
+          name="name"
+          placeholder="Name"
+          autoComplete="off"
+        />
 
-          <input
-            className="dark:text-slate-900 p-2"
-            type="text"
-            value={newUser.username}
-            onChange={handleInputChange}
-            placeholder="Username"
-            autoComplete="off"
-          />
+        <input
+          className="dark:text-slate-900 p-2"
+          type="text"
+          name="email"
+          placeholder="Email"
+          autoComplete="off"
+        />
 
-          <input
-            className="dark:text-slate-900 p-2"
-            type="text"
-            value={newUser.email}
-            onChange={handleInputChange}
-            placeholder="Email"
-            autoComplete="off"
-          />
+        <input
+          className="dark:text-slate-900 p-2"
+          type="text"
+          name="username"
+          placeholder="Username"
+          autoComplete="off"
+        />
 
-          <input
-            className="dark:text-slate-900 p-2"
-            type="text"
-            value={newUser.address?.street}
-            onChange={handleInputChange}
-            placeholder="Street"
-            autoComplete="off"
-          />
+        <input
+          className="dark:text-slate-900 p-2"
+          type="text"
+          name="website"
+          placeholder="Website"
+          autoComplete="off"
+        />
+        <input
+          className="dark:text-slate-900 p-2"
+          type="text"
+          name="phone"
+          placeholder="Phone"
+          autoComplete="off"
+        />
 
-          {/* Add more inputs for other fields in a similar way */}
+        <input
+          className="dark:text-slate-900 p-2"
+          type="text"
+          name="avatar"
+          placeholder="Avatar"
+          autoComplete="off"
+        />
 
-          <input
-            className="dark:text-slate-900 p-2"
-            type="text"
-            value={newUser.avatar}
-            onChange={handleInputChange}
-            placeholder="Avatar"
-            autoComplete="off"
-          />
+        <input
+          className="dark:text-slate-900 p-2"
+          type="text"
+          name="address.street"
+          placeholder="Street"
+          autoComplete="off"
+        />
 
-          <button onClick={createUser} className="dark:text-slate-900 p-2">
-            Create User
-          </button>
-        </form>
-      </div>
+        <input
+          className="dark:text-slate-900 p-2"
+          type="text"
+          name="address.suite"
+          placeholder="Suite"
+          autoComplete="off"
+        />
+
+        <input
+          className="dark:text-slate-900 p-2"
+          type="text"
+          name="address.city"
+          placeholder="City"
+          autoComplete="off"
+        />
+
+        <input
+          className="dark:text-slate-900 p-2"
+          type="text"
+          name="address.zipcode"
+          placeholder="Zipcode"
+          autoComplete="off"
+        />
+
+        <input
+          className="dark:text-slate-900 p-2"
+          type="text"
+          name="address.geo.lat"
+          placeholder="Latitude"
+          autoComplete="off"
+        />
+
+        <input
+          className="dark:text-slate-900 p-2"
+          type="text"
+          name="address.geo.lng"
+          placeholder="Longitude"
+          autoComplete="off"
+        />
+
+        <input
+          className="dark:text-slate-900 p-2"
+          type="text"
+          name="company.catchPhrase"
+          placeholder="catchPhrase"
+          autoComplete="off"
+        />
+
+        <input
+          className="dark:text-slate-900 p-2"
+          type="text"
+          name="company.bs"
+          placeholder="bs"
+          autoComplete="off"
+        />
+
+        <input
+          className="dark:text-slate-900 p-2"
+          type="text"
+          name="company.name"
+          placeholder="company-name"
+          autoComplete="off"
+        />
+
+        <button
+          type="submit"
+          className="dark:text-slate-300 text-gray-900 p-2 rounded-2xl bg-slate-800 hover:bg-slate-700 active:bg-slate-900"
+        >
+          Create User
+        </button>
+      </form>
     </div>
   );
 }
