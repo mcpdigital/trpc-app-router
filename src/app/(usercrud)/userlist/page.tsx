@@ -2,31 +2,7 @@
 // src/app/[userscrud]/updateuser/page.tsx
 import { useEffect, useState } from "react";
 import { trpc } from "@/lib/trpc/trpc-client";
-
-interface UserData {
-  id: number;
-  name: string;
-  username: string;
-  email: string;
-  address: {
-    street: string;
-    suite: string;
-    city: string;
-    zipcode: string;
-    geo: {
-      lat: string;
-      lng: string;
-    };
-  };
-  phone: string;
-  website: string;
-  company: {
-    name: string;
-    catchPhrase: string;
-    bs: string;
-  };
-  avatar: string;
-}
+import { UserData } from "@/types/types";
 
 export default function UsersList() {
   const [users, setUsers] = useState<UserData[]>([]);
