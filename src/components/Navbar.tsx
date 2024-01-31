@@ -36,7 +36,7 @@ const Navbar = () => {
       title: "Clerk",
       links: [
         { title: "Profile", url: "/profile", role: "org:member" },
-        { title: "Dashboard", url: "/dashboard", role: "org:member" },
+        { title: "User", url: "/user", role: "org:member" },
       ],
       role: "org:ai",
     },
@@ -140,6 +140,8 @@ const Navbar = () => {
               group.links.some(
                 (link) =>
                   link.role.includes(userRole) ||
+                  (link.role.includes("org:member") &&
+                    userRole?.includes("org:ai")) ||
                   userRole?.includes("org:admin") ||
                   !link.role.length
               ) && (
@@ -151,6 +153,8 @@ const Navbar = () => {
                     {group.links.map(
                       (link) =>
                         (link.role.includes(userRole) ||
+                          (link.role.includes("org:member") &&
+                            userRole.includes("org:ai")) ||
                           userRole?.includes("org:admin") ||
                           !link.role.length) && (
                           <li
