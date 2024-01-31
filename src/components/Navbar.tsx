@@ -43,10 +43,11 @@ const Navbar = () => {
     {
       title: "Users",
       links: [
-        { title: "Users List", url: "/userlist", role: "org:member" },
-        { title: "Delete User", url: "/deleteuser", role: "org:admin" },
-        { title: "Create User", url: "/createuser", role: "org:admin" },
-        { title: "Update User", url: "/updateuser", role: "org:admin" },
+        { title: "CRUD", url: "/crud", role: "" },
+        { title: "Users List", url: "/userlist", role: "" },
+        { title: "Delete User", url: "/deleteuser", role: "" },
+        { title: "Create User", url: "/createuser", role: "" },
+        { title: "Update User", url: "/updateuser", role: "" },
       ],
       role: "org:admin",
     },

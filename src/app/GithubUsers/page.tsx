@@ -33,7 +33,15 @@ const ApiData = () => {
       <h1 className="mb-4 text-2xl font-bold">COMPONENT MODE- GitHub Users</h1>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {data.map((user) => (
-          <UserCard key={user.id} user={user} />
+          <UserCard
+            key={user.id}
+            user={user}
+            tw_string={
+              " h-[350px] w-[250px] rounded-xl p-6 text-center dark:text-slate-300 text-slate-800 shadow-2xl dark: " +
+              GRAD_GOTHAN_TB +
+              " bg-slate-400"
+            }
+          />
         ))}
       </div>
     </div>

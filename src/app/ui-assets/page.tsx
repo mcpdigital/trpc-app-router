@@ -11,7 +11,7 @@ import {
   ButtonRedS,
   ButtonGoldS,
 } from "../../twstyles/buttons";
-import { User } from "@clerk/nextjs/server";
+
 import MyGithub from "../../components/MyGithub";
 
 const uiassets = () => {
