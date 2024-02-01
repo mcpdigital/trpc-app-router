@@ -1,126 +1,46 @@
-# Next.js 14 Application with tRPC and App Router
+# Next.js Application with TRPC, Prisma, Clerk, and Tailwind CSS
 
-## Overview
+This is a full-stack application built using a modern tech stack of Node.js, Next.js, React, tRPC, Prisma, Clerk, and Tailwind CSS. The application features a CRUD interface for a `UserData` schema, which corresponds to the data structure returned by the [JSONPlaceholder API](https://jsonplaceholder.typicode.com/users).
 
-Welcome to the Next.js 14 application leveraging the power of tRPC and the App Router. This application demonstrates the integration of tRPC on the App Router, utilizing React Query for enhanced data fetching.
+## Tech Stack
 
-## tRPC Integration
+- **Node.js**: A JavaScript runtime built on Chrome's V8 JavaScript engine.
+- **Next.js**: A React framework for building JavaScript applications.
+- **React**: A JavaScript library for building user interfaces.
+- **tRPC**: An end-to-end typesafe RPC framework.
+- **Prisma**: An open-source database toolkit.
+- **Clerk**: A complete user management solution.
+- **Tailwind CSS**: A utility-first CSS framework for rapidly building custom designs.
 
-This application demonstrates the implementation of tRPC on the App Router using React Query. The combination allows for efficient and declarative data fetching.
+## Features
 
-## React Query Version
-
-Note that this project intentionally uses React Query v4 because tRPC currently does not support the newer v5.
-
-### Technologies Used
-
-- Next.js 14
-- tRPC (v10)
-- React Query (v4)
+- **CRUD Operations**: The application provides a user interface for creating, reading, updating, and deleting `UserData`.
+- **Type Safety**: Thanks to tRPC, the application has end-to-end type safety.
+- **User Management**: With Clerk, the application handles user authentication and management.
+- **Responsive Design**: Tailwind CSS is used for a mobile-first, responsive design.
 
 ## Getting Started
 
-Follow these steps to get the project up and running on your local machine:
+1. Clone the repository:
+   git clone https://github.com/mcpdigital/trpc-app-router
+2. Install the dependencies:
+   npm install
+3. Start the development server:
+   npm run dev
+4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-1. Clone the Repository:
+## Deployment
 
-```bash
-git clone https://github.com/your-username/trpc-app-router.git
-cd trpc-app-router
-```
+The application is deployed on Vercel. To deploy your own version, you can follow the [Vercel deployment documentation](https://vercel.com/docs).
 
-2. Install Dependencies:
+## Database
 
-```bash
-# npm
-npm install
-
-#yarn
-yarn install
-
-# pnpm
-pnpm install
-
-# bun
-bun install
-```
-
-3. Start a local postgres database (optionally using the docker-compose provided)
-
-```bash
-sudo systemctl start docker.service
-cd docker && sudo docker-compose up -d
-```
-
-4. Migrate the database
-
-```bash
-# run migrations on the database
-pnpm prisma db push && prisma generate
-```
-
-5. Run the application
-
-```bash
-pnpm run dev
-```
-
-## Project Structure
-
-```bash
-├── docker
-│   └── docker-compose.yml
-├── next.config.js
-├── next-env.d.ts
-├── package.json
-├── pnpm-lock.yaml
-├── postcss.config.js
-├── prisma
-│   └── schema.prisma
-├── public
-│   ├── next.svg
-│   └── vercel.svg
-├── README.md
-├── src
-│   ├── app
-│   │   ├── api
-│   │   │   └── trpc
-│   │   │       └── [trpc]
-│   │   │           └── route.ts
-│   │   ├── favicon.ico
-│   │   ├── layout.tsx
-│   │   └── (root)
-│   │       └── page.tsx
-│   ├── components
-│   │   ├── providers
-│   │   │   └── trpc-provider.tsx
-│   │   └── todos
-│   │       └── todo-list.tsx
-│   ├── lib
-│   │   └── trpc
-│   │       └── trpc-client.ts
-│   ├── server
-│   │   ├── db
-│   │   │   └── prisma.ts
-│   │   └── trpc
-│   │       ├── router.ts
-│   │       ├── routes
-│   │       │   └── todo.ts
-│   │       └── trpc.ts
-│   └── styles
-│       └── globals.css
-├── tailwind.config.ts
-└── tsconfig.json
-```
-
-## Usage
-
-Feel free to adapt and extend this project for your own needs. Leverage the tRPC integration, React Query setup, and App Router for building robust and efficient Next.js applications.
+The application uses a MySQL database hosted on PlanetScale.
 
 ## Contributing
 
-If you'd like to contribute to this project, please follow the standard GitHub fork and pull request workflow. Your contributions are greatly appreciated!
+Contributions are welcome. Please open an issue or submit a pull request.
 
 ## License
 
-This project is licensed under the MIT License. Feel free to use and modify it for your own purposes.
+This project is licensed under the MIT License.

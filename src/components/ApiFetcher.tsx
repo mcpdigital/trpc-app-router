@@ -1,29 +1,34 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useQuery } from "react-query";
 
 interface ApiFetcherProps<T> {
   endpointUrl: string;
   render: (data: T[]) => React.ReactNode;
 }
 
+async function fetchData<T>(url: string): Promise<T[]> {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  const data: T[] = await response.json();
+  return data;
+}
+
 function ApiFetcher<T>({ endpointUrl, render }: ApiFetcherProps<T>) {
-  const [data, setData] = useState<T[]>([]);
+  const {
+    data = [],
+    isLoading,
+    error,
+  } = useQuery<T[]>(endpointUrl, () => fetchData<T>(endpointUrl));
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(endpointUrl);
-        if (!response.ok) {
-          throw new Error("Failed to fetch data");
-        }
-        const jsonData: T[] = (await response.json()) as T[];
-        setData(jsonData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
-    void fetchData();
-  }, [endpointUrl]);
+  if (error) {
+    return <div>An error has occurred: {(error as Error).message}</div>;
+  }
 
   return <>{render(data)}</>;
 }

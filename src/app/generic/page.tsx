@@ -6,10 +6,14 @@ import Image from "next/image";
 
 const API_ENDPOINT_URL = "https://jsonplaceholder.typicode.com/users";
 
-const ApiData = () => {
+const FetchedDataPage = () => {
   const renderData = (data: UserData[]) => (
     <div className={GRAD_GOTHAN_TB + "container  p-4 text-slate-300"}>
-      <h1 className="mb-4 text-2xl font-bold">COMPONENT MODE- GitHub Users</h1>
+      <h1 className="mb-4 text-2xl font-bold">
+        <p>Fetching APIs</p>
+      </h1>
+      <p> by calling a generic ApiFetcher component that uses</p>
+      react-query.
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {data.map((user) => (
           <div
@@ -43,4 +47,4 @@ const ApiData = () => {
   );
 };
 
-export default ApiData;
+export default FetchedDataPage;
