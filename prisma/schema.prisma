@@ -13,7 +13,7 @@ model Todo {
   done    Boolean @default(false)
 }
 
-model User {
+model CrudUser {
   id        Int      @id @default(autoincrement())
   name      String
   username  String
@@ -28,14 +28,14 @@ model User {
 }
 
 model Address {
-  id      Int     @id @default(autoincrement())
+  id      Int       @id @default(autoincrement())
   street  String
   suite   String
   city    String
   zipcode String
-  geo     Geo     @relation(fields: [geoId], references: [id])
+  geo     Geo       @relation(fields: [geoId], references: [id])
   geoId   Int
-  User    User[]
+  CrudUser CrudUser[]
 }
 
 model Geo {
@@ -46,9 +46,9 @@ model Geo {
 }
 
 model Company {
-  id          Int    @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   name        String
   catchPhrase String
   bs          String
-  User        User[]
+  CrudUser    CrudUser[]
 }

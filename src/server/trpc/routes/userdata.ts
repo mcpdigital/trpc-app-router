@@ -52,7 +52,7 @@ const deleteUserDataSchema = z.object({
 
 export const userDataRouter = router({
   getUserData: publicProcedure.query(async () => {
-    return await prisma.user.findMany({
+    return await prisma.crudUser.findMany({
       include: {
         address: {
           include: {
@@ -66,7 +66,7 @@ export const userDataRouter = router({
   createUserData: publicProcedure
     .input(createUserDataSchema)
     .mutation(async ({ input }) => {
-      return await prisma.user.create({
+      return await prisma.crudUser.create({
         data: {
           name: input.name,
           username: input?.username || "",
@@ -102,7 +102,7 @@ export const userDataRouter = router({
     .input(updateUserDataSchema)
     .mutation(async ({ input }) => {
       const { id, ...data } = input as UpdateUserData;
-      return await prisma.user.update({
+      return await prisma.crudUser.update({
         where: { id },
         data: {
           ...data,
@@ -123,6 +123,6 @@ export const userDataRouter = router({
   deleteUserData: publicProcedure
     .input(deleteUserDataSchema)
     .mutation(async ({ input }) => {
-      return await prisma.user.delete({ where: { id: input.id } });
+      return await prisma.crudUser.delete({ where: { id: input.id } });
     }),
 });

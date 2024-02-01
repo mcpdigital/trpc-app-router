@@ -21,7 +21,6 @@
     "openai": "^4.25.0",
     "react": "^18",
     "react-dom": "^18",
-    "react-query": "^3.39.3",
     "zod": "^3.22.4"
   },
   "devDependencies": {
