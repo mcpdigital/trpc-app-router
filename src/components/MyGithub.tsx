@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import UserCard from "../components/ui/GHUserCard";
+import UserCard from "./appui/GHUserCard";
 import { GRAD_GOTHAN_TB } from "../tw_gradients";
 import type { GHApiResponse } from "../types/types"; // Import ApiResponse interface from a shared types file
 

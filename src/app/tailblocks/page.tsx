@@ -1,6 +1,6 @@
 import { SignInButton, SignedIn, SignedOut } from "@clerk/nextjs";
 import React from "react";
-import TailBlocks from "../../components/ui/TailBlocks";
+import TailBlocks from "../../components/appui/TailBlocks";
 import { ButtonGoldS } from "../../twstyles/buttons";
 
 const pgtailblocks = () => {

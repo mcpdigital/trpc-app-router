@@ -53,3 +53,4 @@ export const RAD_PURPLE4 =
   "bg-[conic-gradient(at_bottom_left,_var(--tw-gradient-stops))] from-gray-900 via-purple-900 to-violet-900";
 export const GRAD_BUTTON1 =
   "bg-gradient-to-r from-blue-500 to-purple-500 text-white p-2 rounded hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600";
+export const GRAD_PERICIA2 = "linear-gradient(311deg,#91acfc,#03022c)";

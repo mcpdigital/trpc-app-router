@@ -1,5 +1,3 @@
-"use client";
-
 import MyHome from "@/components/MyHome";
 
 export default function Home() {

@@ -63,6 +63,7 @@ export const userDataRouter = router({
       },
     });
   }),
+
   createUserData: publicProcedure
     .input(createUserDataSchema)
     .mutation(async ({ input }) => {
@@ -98,6 +99,7 @@ export const userDataRouter = router({
         },
       });
     }),
+  // Update UserData table
   updateUserData: publicProcedure
     .input(updateUserDataSchema)
     .mutation(async ({ input }) => {

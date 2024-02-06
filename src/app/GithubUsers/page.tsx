@@ -1,7 +1,7 @@
 "use client";
 import type { GHApiResponse } from "../../types/types"; // Import ApiResponse interface from a shared types file
 import ApiFetcher from "../../components/ApiFetcher"; // Import the ApiFetcher component
-import UserCard from "../../components/ui/GHUserCard"; // Import the UserCard component
+import UserCard from "../../components/appui/GHUserCard"; // Import the UserCard component
 import { GRAD_GOTHAN_TB } from "../../tw_gradients";
 
 const API_ENDPOINT_URL = "https://api.github.com/users";
