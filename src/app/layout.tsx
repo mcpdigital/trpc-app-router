@@ -29,7 +29,7 @@ export default function RootLayout({
     >
       <html className="dark" lang="en">
         <body
-          className={` bg:slate-200 font-sans text-black dark:bg-slate-800 dark:text-white ${inter.variable}`}
+          className={`antialiased noisesvg bg:slate-200 font-sans text-black dark:bg-slate-800 dark:text-white ${inter.variable}`}
         >
           <main className="app">
             <Navbar />

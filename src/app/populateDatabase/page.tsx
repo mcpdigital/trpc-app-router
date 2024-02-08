@@ -3,7 +3,6 @@
 import { useEffect } from "react";
 import { trpc } from "@/lib/trpc/trpc-client";
 import { UpdateUserData } from "@/types/types";
-import { Update } from "next/dist/build/swc";
 
 export default function PopulateDatabase() {
   const createUserDataMutation = trpc.userData.createUserData.useMutation();
@@ -53,5 +52,5 @@ export default function PopulateDatabase() {
     void populateDatabase();
   }, []);
 
-  return <div>OK</div>;
+  return <div>Database populated OK</div>;
 }

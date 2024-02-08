@@ -41,6 +41,8 @@ export default function UserManagementPage() {
     event.preventDefault();
     const id = updatedUser?.id;
     updateUserMutation.mutate({ id: Number(id), ...updatedUser });
+
+    setUpdatedUser(null); // clear the form
   };
 
   // Handle delete
@@ -56,13 +58,13 @@ export default function UserManagementPage() {
 
   return (
     <div
-      className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+      className="grid grid-cols-1 mx-auto my-2 gap-2 sm:mx-4 text-center sm:max-w-auto sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
       style={{ minHeight: "calc(85vh - 60px)" }}
     >
       {usersQuery.data?.map((user) => (
         <div
           key={user.id}
-          className="  dark:text-slate-300  dark:bg-slate-800  p-5  pb-1 "
+          className="  dark:text-slate-300  dark:bg-slate-800 rounded-xl p-5   "
         >
           {/* Display user information */}
           <div className="dark:text-slate-300 dark:bg-slate-600 p-2 rounded-lg shadow-xl ">
@@ -72,7 +74,10 @@ export default function UserManagementPage() {
             <div className="flex mt-4 gap-2 justify-center">
               <button
                 className="rounded-md dark:bg-blue-600 min-w-[72px] p-2"
-                onClick={() => setSelectedUser(user)}
+                onClick={() => {
+                  setSelectedUser(user);
+                  setUpdatedUser(user); // set updatedUser when a user is selected
+                }}
               >
                 Update
               </button>
@@ -88,23 +93,37 @@ export default function UserManagementPage() {
       ))}
 
       {/* Update form */}
-      {selectedUser && (
-        <form onSubmit={handleSubmit}>
-          {/* Include form fields for all properties of the user */}
-          <input
-            name="name"
-            value={updatedUser?.name || ""}
-            onChange={handleInputChange}
-          />
-          <input
-            name="email"
-            value={updatedUser?.email || ""}
-            onChange={handleInputChange}
-          />
-          {/* Add more fields as needed */}
-          <button type="submit">Submit</button>
-        </form>
-      )}
+      <div className="dark:text-slate-900 text-slate-900">
+        {selectedUser && (
+          <form
+            onSubmit={handleSubmit}
+            className="dark:text-slate-900 bg-slate-400 p-4 text-center rounded-xl shadow-xl dark:bg-slate-800"
+          >
+            {/* Include form fields for all properties of the user */}
+            <input
+              className="dark:text-slate-900 dark:bg-slate-300 p-2 rounded-md mt-2"
+              name="name"
+              value={updatedUser?.name || ""}
+              onChange={handleInputChange}
+            />
+            <input
+              className="dark:text-slate-900 dark:bg-slate-300 p-2 rounded-md mt-2"
+              name="email"
+              value={updatedUser?.email || ""}
+              onChange={handleInputChange}
+            />
+            {/* Add more fields as needed */}
+            <p>
+              <button
+                className="mt-2 rounded-md text-slate-100 dark:bg-blue-600 min-w-[72px] p-2"
+                type="submit"
+              >
+                Submit
+              </button>
+            </p>
+          </form>
+        )}
+      </div>
     </div>
   );
 }

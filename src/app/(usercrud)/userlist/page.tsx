@@ -15,7 +15,7 @@ export default function UsersList() {
   }, [getUsers.data]);
 
   return (
-    <div>
+    <div className="bg-slate-900">
       {users.map((user) => (
         <div key={user.id}>
           <h2>{user.name}</h2>

@@ -1,5 +1,5 @@
 import React from "react";
-
+import { ArrowRight } from "lucide-react";
 // This code snippet defines a functional component called FeatureCards in React. It takes in props href, h2, and p.
 
 // The component renders an anchor tag (<a>) with various CSS classes and attributes. Inside the anchor tag, there is an <h2> element with a span element nested inside it. Finally, there is a <p> element.
@@ -19,7 +19,9 @@ const FeatureCards: React.FC<FeatureCardsProps> = ({ href, h2, p }) => (
     <h2 className="mb-3 text-2xl font-semibold">
       {h2}{" "}
       <span className="inline-block  transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-        -&gt;
+        {" "}
+        <ArrowRight className="ml-1.5 h-5 w-5" />
+        {/* -&gt; */}
       </span>
     </h2>
     <p className="m-0 max-w-[40ch] text-sm opacity-50 ">{p}</p>
