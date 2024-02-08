@@ -2,6 +2,8 @@
 // src/app/usercrud/deleteuser/page.tsx
 import { useEffect } from "react";
 import { trpc } from "@/lib/trpc/trpc-client";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function DeleteUserPage() {
   const usersQuery = trpc.userData.getUserData.useQuery();
@@ -9,6 +11,7 @@ export default function DeleteUserPage() {
 
   const deleteUser = (id: number) => {
     deleteUserMutation.mutate({ id: Number(id) });
+    toast.success("User deleted successfully", { autoClose: 2000 });
   };
 
   useEffect(() => {
@@ -30,6 +33,7 @@ export default function DeleteUserPage() {
       className="flex flex-col p-2 border border-slate-950 m-4 rounded-2xl"
       style={{ minHeight: "calc(85vh - 60px)" }}
     >
+      <ToastContainer position="top-center" />
       <h1 className="p-4 text-4xl">Delete User</h1>
       <table
         id="userstable"

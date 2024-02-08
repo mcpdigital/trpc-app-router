@@ -2,9 +2,32 @@
 import { useState, useEffect } from "react";
 import { trpc } from "@/lib/trpc/trpc-client";
 import { UpdateUserData } from "@/types/types";
-
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export default function UpdateUserPage() {
-  const [updatedUser, setUpdatedUser] = useState<UpdateUserData | null>(null);
+  const defaultUser: UpdateUserData = {
+    id: 0,
+    name: "",
+    username: "",
+    email: "",
+    phone: "",
+    website: "",
+    avatar: "",
+    address: {
+      street: "",
+      suite: "",
+      city: "",
+      zipcode: "",
+    },
+    company: {
+      name: "",
+      catchPhrase: "",
+      bs: "",
+    },
+  };
+  const [updatedUser, setUpdatedUser] = useState<UpdateUserData | null>(
+    defaultUser
+  );
   const usersQuery = trpc.userData.getUserData.useQuery();
   const updateUserMutation = trpc.userData.updateUserData.useMutation();
 
@@ -39,6 +62,8 @@ export default function UpdateUserPage() {
     event.preventDefault();
     const id = updatedUser?.id;
     updateUserMutation.mutate({ id: Number(id), ...updatedUser });
+    setUpdatedUser(defaultUser); // reset form after submission
+    toast.success("User updated successfully", { autoClose: 2000 }); // display success notification
   };
 
   useEffect(() => {
@@ -53,6 +78,8 @@ export default function UpdateUserPage() {
 
   return (
     <div className="dark:text-slate-300 border border-black m-4 p-2 rounded-lg  flex flex-col">
+      <ToastContainer position="bottom-center" />
+      <h1 className="p-4 text-4xl">Update User</h1>
       <table className="table-auto w-full bg-slate-900 table-row p-4 rounded-lg ">
         <thead className="table-header-group rounded-t-lg h-[50px] ">
           <tr className=" text-left text-lg rounded-t-lg bg-slate-800  ">

@@ -43,6 +43,7 @@ export default function CreateUserPage() {
 
   return (
     <div className="flex flex-col mx-auto mt-4 p-4 items-center dark:text-slate-200">
+      <h1 className="p-4 text-4xl">Create User</h1>
       <form
         ref={formRef}
         onSubmit={handleSubmit}
@@ -168,7 +169,7 @@ export default function CreateUserPage() {
 
         <button
           type="submit"
-          className="dark:text-slate-300 text-gray-900 p-2 rounded-2xl bg-slate-800 hover:bg-slate-700 active:bg-slate-900 mt-4"
+          className="dark:text-slate-300 text-gray-900 p-2 rounded-2xl bg-slate-800 hover:bg-slate-950 active:bg-slate-900 my-40 mx-20"
         >
           Create User
         </button>
