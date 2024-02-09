@@ -4,6 +4,7 @@ import { trpc } from "@/lib/trpc/trpc-client";
 import { UpdateUserData, UserData } from "@/types/types";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Modal from "react";
 
 export default function UserManagementPage() {
   const [selectedUser, setSelectedUser] = useState<UserData | null>(null);
@@ -11,7 +12,7 @@ export default function UserManagementPage() {
   const usersQuery = trpc.userData.getUserData.useQuery();
   const updateUserMutation = trpc.userData.updateUserData.useMutation();
   const deleteUserMutation = trpc.userData.deleteUserData.useMutation();
-
+  const [isFormVisible, setIsFormVisible] = useState(true);
   // Handle input change
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -43,9 +44,7 @@ export default function UserManagementPage() {
     event.preventDefault();
     const id = updatedUser?.id;
     updateUserMutation.mutate({ id: Number(id), ...updatedUser });
-
     setUpdatedUser(null); // clear the form
-    toast.success("User updated successfully", { autoClose: 2000 }); // display success notification
   };
 
   // Handle delete
@@ -54,11 +53,19 @@ export default function UserManagementPage() {
   };
 
   useEffect(() => {
-    if (updateUserMutation.isSuccess || deleteUserMutation.isSuccess) {
-      toast.success("User deleted successfully", { autoClose: 2000 });
+    if (updateUserMutation.isSuccess) {
       usersQuery.refetch();
+      toast.success("User updated successfully", { autoClose: 2000 });
+      setIsFormVisible(false); // hide the form
     }
-  }, [updateUserMutation.isSuccess, deleteUserMutation.isSuccess]);
+  }, [updateUserMutation.isSuccess]);
+
+  useEffect(() => {
+    if (deleteUserMutation.isSuccess) {
+      usersQuery.refetch();
+      toast.success("User deleted successfully", { autoClose: 2000 });
+    }
+  }, [deleteUserMutation.isSuccess]);
 
   return (
     <div>
@@ -84,6 +91,7 @@ export default function UserManagementPage() {
                   onClick={() => {
                     setSelectedUser(user);
                     setUpdatedUser(user); // set updatedUser when a user is selected
+                    setIsFormVisible(true); // show the form
                   }}
                 >
                   Update
@@ -100,11 +108,17 @@ export default function UserManagementPage() {
         ))}
 
         {/* Update form */}
-        <div className="dark:text-slate-900 text-slate-900">
+        <div
+          className={`dark:text-slate-900 text-slate-900 ${
+            isFormVisible ? "" : "hidden"
+          }`}
+        >
           {selectedUser && (
             <form
               onSubmit={handleSubmit}
-              className="dark:text-slate-900 bg-slate-400 p-4 text-center rounded-xl shadow-xl dark:bg-slate-800"
+              className={`dark:text-slate-900 text-slate-900 ${
+                isFormVisible ? "" : "hidden"
+              }`}
             >
               {/* Include form fields for all properties of the user */}
               <input
