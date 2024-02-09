@@ -4,7 +4,6 @@ import { trpc } from "@/lib/trpc/trpc-client";
 import { UpdateUserData, UserData } from "@/types/types";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Modal from "react";
 
 export default function UserManagementPage() {
   const [selectedUser, setSelectedUser] = useState<UserData | null>(null);
