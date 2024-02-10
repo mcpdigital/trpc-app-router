@@ -68,79 +68,181 @@ export default function UserManagementPage() {
 
   return (
     <div>
-      <ToastContainer position="bottom-center" />
+      <ToastContainer position="top-right" />
 
       <div
-        className="grid grid-cols-1 mx-auto my-2 gap-2 sm:mx-4 text-center sm:max-w-auto sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+        className="mx-auto my-2 sm:mx-4 text-left sm:max-w-auto border-1 border border-slate-700 dark:border-slate-900  rounded-lg shadow-xl "
         style={{ minHeight: "calc(85vh - 60px)" }}
       >
-        {usersQuery.data?.map((user) => (
-          <div
-            key={user.id}
-            className="  dark:text-slate-300  dark:bg-slate-800 rounded-xl p-5   "
-          >
-            {/* Display user information */}
-            <div className="dark:text-slate-300 dark:bg-slate-600 p-2 rounded-lg shadow-xl ">
-              <div>{user.name}</div>
-              <div>{user.email}</div>
-
-              <div className="flex mt-4 gap-2 justify-center">
-                <button
-                  className="rounded-md dark:bg-blue-600 min-w-[72px] p-2"
-                  onClick={() => {
-                    setSelectedUser(user);
-                    setUpdatedUser(user); // set updatedUser when a user is selected
-                    setIsFormVisible(true); // show the form
-                  }}
-                >
-                  Update
-                </button>
-                <button
-                  className="rounded-md dark:bg-red-700 min-w-[72px] p-2"
-                  onClick={() => handleDelete(user.id)}
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          </div>
-        ))}
+        <table className="table-auto w-full  bg-gray-800 mt-0 rounded-lg ">
+          <thead className="dark:text-slate-300 text-slate-900 text-2xl">
+            <tr className="h-[4rem] ">
+              <th className="pl-4">Name</th>
+              <th>Email</th>
+              <th className="text-end pr-12">Actions</th>
+            </tr>
+          </thead>
+          <tbody className="">
+            {usersQuery.data?.map((user, index) => (
+              <tr
+                key={user.id}
+                className={
+                  index % 2 === 0
+                    ? "dark:bg-gray-700 bg-gray-200 "
+                    : "dark:bg-slate-800 bg-gray-400"
+                }
+              >
+                <td className="pl-4">{user.name}</td>
+                <td>{user.email}</td>
+                <td className="flex mt-4 gap-4  mr-2 items-center justify-end ">
+                  <button
+                    className="rounded-md dark:bg-blue-600 min-w-[72px] p-1 dark:hover:bg-blue-700 dark:active:bg-blue-800 -mt-3 mb-1"
+                    onClick={() => {
+                      setSelectedUser(user);
+                      setUpdatedUser(user); // set updatedUser when a user is selected
+                      setIsFormVisible(true); // show the form
+                    }}
+                  >
+                    Update
+                  </button>
+                  <button
+                    className="rounded-md dark:bg-red-600/80 min-w-[72px] p-1 -mt-3 mb-1 dark:hover:bg-red-700 dark:active:bg-red-800"
+                    onClick={() => handleDelete(user.id)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
 
         {/* Update form */}
         <div
-          className={`dark:text-slate-900 text-slate-900 ${
+          className={`dark:text-slate-200  dark:bg-slate-900 rounded-xl shadow-xl mb-4 mx-auto  max-w-[466px] text-slate-900 ${
             isFormVisible ? "" : "hidden"
           }`}
         >
           {selectedUser && (
             <form
               onSubmit={handleSubmit}
-              className={`dark:text-slate-900 text-slate-900 ${
+              className={`grid grid-cols-2 ring-2 ring-offset-4 dark:ring-offset-white/15 ring-slate-800  divide-black  dark:bg-slate-800 rounded-xl p-2 gap-2 mt-4 mb-3 ${
                 isFormVisible ? "" : "hidden"
               }`}
             >
               {/* Include form fields for all properties of the user */}
-              <input
-                className="dark:text-slate-900 dark:bg-slate-300 p-2 rounded-md mt-2"
-                name="name"
-                value={updatedUser?.name || ""}
-                onChange={handleInputChange}
-              />
-              <input
-                className="dark:text-slate-900 dark:bg-slate-300 p-2 rounded-md mt-2"
-                name="email"
-                value={updatedUser?.email || ""}
-                onChange={handleInputChange}
-              />
-              {/* Add more fields as needed */}
-              <p>
+              <div>
+                <label
+                  className="text-slate-100 text-left ml-2 dark:text-slate-200 block mb-2"
+                  htmlFor="name"
+                >
+                  Name
+                </label>
+                <input
+                  type="name"
+                  id="name"
+                  className="form-input ml-2 dark:text-slate-900 dark:bg-slate-200 p-2 rounded-md"
+                  name="name"
+                  value={updatedUser?.name || ""}
+                  onChange={handleInputChange}
+                />
+              </div>
+
+              <div>
+                <label
+                  className="text-slate-100 text-left ml-2 dark:text-slate-200 block mb-2"
+                  htmlFor="email"
+                >
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  className="form-input  dark:text-slate-900 ml-2 dark:bg-slate-200 p-2 rounded-md"
+                  name="email"
+                  value={updatedUser?.email || ""}
+                  onChange={handleInputChange}
+                />
+              </div>
+
+              <div>
+                <label
+                  className="text-slate-100 text-left ml-2 dark:text-slate-200 block mb-2"
+                  htmlFor="city"
+                >
+                  City
+                </label>
+                <input
+                  type="text"
+                  id="city"
+                  className="form-input ml-2 dark:text-slate-900 dark:bg-slate-200 p-2 rounded-md"
+                  name="city"
+                  value={updatedUser?.address?.city || ""}
+                  onChange={handleInputChange}
+                />
+              </div>
+
+              <div>
+                <label
+                  className="text-slate-100 text-left ml-2 dark:text-slate-200 block mb-2"
+                  htmlFor="street"
+                >
+                  Street
+                </label>
+                <input
+                  type="text"
+                  id="street"
+                  className="form-input ml-2 dark:text-slate-900 dark:bg-slate-200 p-2 rounded-md"
+                  name="street"
+                  value={updatedUser?.address?.street || ""}
+                  onChange={handleInputChange}
+                />
+              </div>
+
+              <div>
+                <label
+                  className="text-slate-100 text-left ml-2 dark:text-slate-200 block mb-2"
+                  htmlFor="website"
+                >
+                  Website
+                </label>
+                <input
+                  title="Website"
+                  placeholder="Website"
+                  type="text"
+                  id="website"
+                  className="form-input ml-2 dark:text-slate-900 dark:bg-slate-200 p-2 rounded-md"
+                  name="website"
+                  value={updatedUser?.website || ""}
+                  onChange={handleInputChange}
+                />
+              </div>
+
+              <div>
+                <label
+                  className="text-slate-100 text-left ml-2 dark:text-slate-200 block mb-2"
+                  htmlFor="companyname"
+                >
+                  Company
+                </label>
+                <input
+                  type="text"
+                  id="companyname"
+                  className="form-input ml-2 dark:text-slate-900 dark:bg-slate-200 p-2 rounded-md"
+                  name="companyname"
+                  value={updatedUser?.company?.name || ""}
+                  onChange={handleInputChange}
+                />
+              </div>
+
+              <div className="col-span-2 inline-flex justify-center">
                 <button
-                  className="mt-2 rounded-md text-slate-100 dark:bg-blue-600 min-w-[72px] p-2"
+                  className="mt-4 mb-2  rounded-md text-slate-100 dark:bg-blue-600 min-w-[72px] p-1 "
                   type="submit"
                 >
-                  Submit
+                  Update
                 </button>
-              </p>
+              </div>
             </form>
           )}
         </div>
