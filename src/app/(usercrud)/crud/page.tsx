@@ -151,9 +151,12 @@ export default function UserManagementPage() {
                     </div>
                   </DialogTrigger>
                   {updatedUser && (
-                    <DialogContent className="grid grid-cols-2 ring-2 ring-offset-4 dark:ring-offset-white/15 ring-slate-800  divide-black  dark:bg-slate-800 rounded-xl p-2 gap-2 mt-4 mb-3">
+                    <DialogContent className=" ring-2 ring-offset-4 dark:ring-offset-white/15 ring-slate-800  divide-black  dark:bg-slate-800 rounded-xl p-2 gap-2 mt-4 mb-3">
+                      <div className="text-2xl flex flex-row p-4 justify-center">
+                        UPDATE USER
+                      </div>
                       <form
-                        className="grid grid-cols-2 min-w-[466px] dark:bg-slate-800 rounded-xl p-2 gap-2 mt-4 mb-3"
+                        className="grid  grid-cols-1 mx-2 place-items-center sm:grid-cols-2  sm:justify-between  dark:bg-slate-800 rounded-xl p-2 gap-2 mt-4 mb-3"
                         onSubmit={(e) => {
                           e.preventDefault();
                           handleSubmit(e);
@@ -264,7 +267,7 @@ export default function UserManagementPage() {
                           />
                         </div>
 
-                        <div className="col-span-2 inline-flex items-top justify-center mt-4 ">
+                        <div className="sm:col-span-2 inline-flex items-top justify-center mt-4 ">
                           <button
                             type="submit"
                             title="Update"
