@@ -27,7 +27,7 @@ export default function RootLayout({
         baseTheme: shadesOfPurple,
       }}
     >
-      <html className="light" lang="en">
+      <html className="dark" lang="en">
         <body
           className={`antialiased noisesvg bg:slate-200 font-sans text-black bg-slate-300 dark:bg-slate-800 dark:text-white ${inter.variable}`}
         >
