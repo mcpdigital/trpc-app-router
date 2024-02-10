@@ -1,4 +1,5 @@
 "use client";
+import Loading from "@/components/Loading";
 import { useState, useEffect } from "react";
 import { trpc } from "@/lib/trpc/trpc-client";
 import { UpdateUserData, UserData } from "@/types/types";
@@ -17,6 +18,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { GRAD_PANDORA } from "@/tw_gradients";
+import { DialogClose } from "@radix-ui/react-dialog";
 
 export default function UserManagementPage() {
   const [selectedUser, setSelectedUser] = useState<UserData | null>(null);
@@ -25,6 +27,8 @@ export default function UserManagementPage() {
   const updateUserMutation = trpc.userData.updateUserData.useMutation();
   const deleteUserMutation = trpc.userData.deleteUserData.useMutation();
   const [isFormVisible, setIsFormVisible] = useState(true);
+  const [isUpdateLoading, setIsUpdateLoading] = useState(false);
+  const [isDeleteLoading, setIsDeleteLoading] = useState(false);
 
   // Handle input change
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,36 +60,55 @@ export default function UserManagementPage() {
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
     const id = updatedUser?.id;
-    updateUserMutation.mutate({ id: Number(id), ...updatedUser });
-
-    setUpdatedUser(null); // clear the form
-    setSelectedUser(null); // close the dialog
-    setIsFormVisible(false); // hide the form
+    setIsUpdateLoading(true);
+    updateUserMutation.mutate(
+      { id: Number(id), ...updatedUser },
+      {
+        onSuccess: () => {
+          setIsUpdateLoading(false);
+          setUpdatedUser(null); // clear the form
+          setSelectedUser(null); // close the dialog
+          setIsFormVisible(false); // hide the form
+        },
+      }
+    );
   };
 
   // Handle delete
   const handleDelete = (userId: number) => {
+    setIsDeleteLoading(true);
     deleteUserMutation.mutate({ id: userId });
+
     setSelectedUser(null); // close the dialog
   };
 
   useEffect(() => {
-    if (updateUserMutation.isSuccess) {
-      toast.success("User updated successfully", { autoClose: 2000 }); // display success notification
-      usersQuery.refetch();
+    if (updateUserMutation.isSuccess || updateUserMutation.isError) {
+      setIsUpdateLoading(false);
+      console.log("isUpdateLoading", isUpdateLoading);
+
+      if (updateUserMutation.isSuccess) {
+        toast.success("User updated successfully", { autoClose: 500 }); // display success notification
+        usersQuery.refetch();
+      }
     }
   }, [updateUserMutation.isSuccess]);
 
   useEffect(() => {
-    if (deleteUserMutation.isSuccess) {
-      toast.success("User deleted successfully", { autoClose: 2000 });
-      usersQuery.refetch();
+    if (deleteUserMutation.isSuccess || deleteUserMutation.isError) {
+      setIsDeleteLoading(false); // set loading state to false when the mutation is completed
+      console.log("isDeleteLoading", isDeleteLoading);
+
+      if (deleteUserMutation.isSuccess) {
+        toast.success("User deleted successfully", { autoClose: 500 });
+        usersQuery.refetch();
+      }
     }
   }, [deleteUserMutation.isSuccess]);
 
   return (
     <div className="">
-      <ToastContainer position="bottom-center" />
+      <ToastContainer theme="dark" position="bottom-center" />
       <div className="mx-auto mt-4  mb-6 flex max-w-[98%] justify-center rounded-md border border-blue-600 bg-gray-800 p-0.5 text-center  text-2xl text-gray-200 shadow-xl">
         <div className="  shadow-lg w-full rounded-md bg-slate-900 p-1 text-2xl text-gray-200">
           User Control
@@ -99,44 +122,42 @@ export default function UserManagementPage() {
         {usersQuery.data?.map((user) => (
           <div
             key={user.id}
-            className=" dark:text-slate-200  dark:bg-slate-600  p-3  drop-shadow-lg  border-gray-600 dark:border-gray-700 bg-gradient-to-r from-gray-950 via-blue-950  to-gray-950 "
+            className=" dark:text-slate-200  dark:bg-slate-600  p-3  drop-shadow-lg  border-gray-600 dark:border-gray-700 bg-gradient-to-r from-gray-900 via-gray-950  to-gray-950 "
           >
             {/* Display user information */}
             {/* Display user information */}
-            <div className="dark:text-slate-300 min-h-full dark:bg-slate-600 p-2 rounded-lg  bg-gradient-to-r from-blue-800 via-blue-700  to-blue-950 shadow-inner">
+            <div className="dark:text-slate-300 min-h-full dark:bg-slate-600 p-2 rounded-lg  bg-gradient-to-tr from-blue-900 via-blue-900  to-blue-950 shadow-inner">
               <div
                 className={
                   GRAD_PANDORA +
-                  " text-2xl font-semibold truncate text-center bg-orange-600  bg-clip-text text-transparent "
+                  " bg-gradient-to-t text-2xl font-semibold truncate text-center bg-orange-600  bg-clip-text text-transparent "
                 }
               >
                 {user.name}
               </div>
               <div className="truncate">{user.email}</div>
               <div className="truncate mt-2 text-lg">{user.address.city}</div>
-              <div className="flex  gap-2 justify-evenly mt-6">
+              <div className="flex  gap-2 justify-evenly mt-8">
                 <Dialog>
                   <DialogTrigger
                     onClick={() => {
                       setSelectedUser(user);
                       setUpdatedUser(user); // set updatedUser when a user is selected
-                      setIsFormVisible(true); // show the form
+                      //setIsFormVisible(true); // show the form
                     }}
                   >
-                    <Edit2Icon />
+                    <div className="p-1.5 border-white/50 border-2 rounded-full">
+                      <Edit2Icon size={20} />
+                    </div>
                   </DialogTrigger>
-                  {isFormVisible && (
-                    <DialogContent
-                      className={`grid grid-cols-2 ring-2 ring-offset-4 dark:ring-offset-white/15 ring-slate-800  divide-black  dark:bg-slate-800 rounded-xl p-2 gap-2 mt-4 mb-3 ${
-                        isFormVisible ? "" : "hidden"
-                      }`}
-                    >
+                  {updatedUser && (
+                    <DialogContent className="grid grid-cols-2 ring-2 ring-offset-4 dark:ring-offset-white/15 ring-slate-800  divide-black  dark:bg-slate-800 rounded-xl p-2 gap-2 mt-4 mb-3">
                       <form
                         className="grid grid-cols-2 min-w-[466px] dark:bg-slate-800 rounded-xl p-2 gap-2 mt-4 mb-3"
                         onSubmit={(e) => {
                           e.preventDefault();
                           handleSubmit(e);
-                          setIsFormVisible(false); // close the dialog
+                          // setIsFormVisible(false); // close the dialog
                         }}
                       >
                         <div>
@@ -243,13 +264,18 @@ export default function UserManagementPage() {
                           />
                         </div>
 
-                        <div className="col-span-2 inline-flex justify-center mt-4 ">
+                        <div className="col-span-2 inline-flex items-top justify-center mt-4 ">
                           <button
                             type="submit"
                             title="Update"
                             className=" p-1 min-h-[39px] mx-auto border-white/50 border-2 rounded-lg"
                           >
                             Update
+                            {isUpdateLoading && (
+                              <div className="fixed col-span-2  justify-center -mt-[35%]">
+                                <Loading />
+                              </div>
+                            )}
                           </button>
                         </div>
                       </form>
@@ -259,7 +285,9 @@ export default function UserManagementPage() {
 
                 <Dialog>
                   <DialogTrigger onClick={() => setSelectedUser(user)}>
-                    <Trash />
+                    <div className="p-1.5 border-white/50 border-2 rounded-full">
+                      <Trash size={20} />
+                    </div>
                   </DialogTrigger>
 
                   <DialogContent>
@@ -268,16 +296,21 @@ export default function UserManagementPage() {
                       <button
                         onClick={() => handleDelete(user.id)}
                         title="Delete"
-                        className=" p-2  border-white/50 border-2 rounded-full"
+                        className=" p-2  border-white/50 border-2 w-[44px] hover:border-red-700  rounded-full"
                       >
                         Yes
                       </button>
-                      <button
-                        onClick={() => setSelectedUser(null)}
-                        className=" p-2  border-white/50 border-2 rounded-full"
-                      >
-                        No
-                      </button>
+                      <div className="items-center justify-center">
+                        {isDeleteLoading && <Loading />}
+                      </div>
+                      <DialogClose asChild>
+                        <button
+                          onClick={() => setSelectedUser(null)}
+                          className=" p-2  border-white/50 border-2 w-[44px] hover:border-green-700 rounded-full"
+                        >
+                          No
+                        </button>
+                      </DialogClose>
                     </div>
                   </DialogContent>
                 </Dialog>
