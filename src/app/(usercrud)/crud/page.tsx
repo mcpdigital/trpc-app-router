@@ -17,7 +17,12 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { GRAD_PANDORA } from "@/tw_gradients";
+import {
+  GRAD_BLUESTEEL,
+  GRAD_BUTTON1,
+  GRAD_OCEANIC,
+  GRAD_PANDORA,
+} from "@/tw_gradients";
 import { DialogClose } from "@radix-ui/react-dialog";
 
 export default function UserManagementPage() {
@@ -107,30 +112,30 @@ export default function UserManagementPage() {
   }, [deleteUserMutation.isSuccess]);
 
   return (
-    <div className="">
+    <div className="bg-slate-300 dark:bg-slate-800">
       <ToastContainer theme="dark" position="bottom-center" />
-      <div className="mx-auto mt-4  mb-6 flex max-w-[98%] justify-center rounded-md border border-blue-600 bg-gray-800 p-0.5 text-center  text-2xl text-gray-200 shadow-xl">
-        <div className="  shadow-lg w-full rounded-md bg-slate-900 p-1 text-2xl text-gray-200">
+      <div className="mx-auto mt-4  mb-6 flex max-w-[98%] justify-center rounded-md border-slate-400 border dark:border-blue-600 dark:bg-gray-800 p-0.5 text-center  text-2xl text-gray-200 shadow-xl">
+        <div className="  shadow-lg w-full rounded-md bg-slate-600 dark:bg-slate-800 p-1 text-2xl dark:text-gray-200">
           User Control
         </div>
       </div>
 
       <div
-        className=" grid grid-cols-1 mx-auto my-2 gap-8 sm:mx-4 text-center sm:max-w-auto sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+        className=" grid grid-cols-1 mx-auto my-2 gap-8 bg-slate-300 dark:bg-slate-800 p-2 dark:p-0 sm:mx-4 text-center sm:max-w-auto sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 "
         style={{ minHeight: "calc(85vh - 60px)" }}
       >
         {usersQuery.data?.map((user) => (
           <div
             key={user.id}
-            className=" dark:text-slate-200  dark:bg-slate-600  p-3  drop-shadow-lg  border-gray-600 dark:border-gray-700 bg-gradient-to-r from-gray-900 via-gray-950  to-gray-950 "
+            className=" dark:text-slate-200 text-slate-800 bg-slate-200 dark:bg-slate-600  p-3  drop-shadow-lg  border-gray-600 dark:border-gray-700 dark:bg-gradient-to-r dark:from-gray-900 dark:via-gray-950  dark:to-gray-950 bg-gradient-to-bl from-gray-600 via-gray-500  to-gray-600 rounded-xl"
           >
             {/* Display user information */}
             {/* Display user information */}
-            <div className="dark:text-slate-300 min-h-full dark:bg-slate-600 p-2 rounded-lg  bg-gradient-to-tr from-blue-900 via-blue-900  to-blue-950 shadow-inner">
+            <div className="dark:text-slate-300 text-slate-800 min-h-full bg-slate-200 dark:bg-slate-600 p-2 rounded-lg  dark:bg-gradient-to-tr dark:from-blue-900 dark:via-blue-900  dark:to-blue-950 bg-gradient-to-tr from-slate-400 via-slate-300  to-slate-400 shadow-inner">
               <div
                 className={
-                  GRAD_PANDORA +
-                  " bg-gradient-to-t text-2xl font-semibold truncate text-center bg-orange-600  bg-clip-text text-transparent "
+                  GRAD_OCEANIC +
+                  " dark:bg-gradient-to-t bg-gradient-to-br dark:from-green-200 dark:via-green-400 dark:to-purple-700 text-2xl font-bold truncate text-center bg-orange-600  bg-clip-text text-transparent "
                 }
               >
                 {user.name}
@@ -146,17 +151,17 @@ export default function UserManagementPage() {
                       //setIsFormVisible(true); // show the form
                     }}
                   >
-                    <div className="p-1.5 border-white/50 border-2 rounded-full">
+                    <div className="p-1.5 dark:border-white/50 border-black/50 border-2 rounded-full">
                       <Edit2Icon size={20} />
                     </div>
                   </DialogTrigger>
                   {updatedUser && (
-                    <DialogContent className=" ring-2 ring-offset-4 dark:ring-offset-white/15 ring-slate-800  divide-black  dark:bg-slate-800 rounded-xl p-2 gap-2 mt-4 mb-3">
-                      <div className="text-2xl flex flex-row p-4 justify-center">
+                    <DialogContent className="  divide-y-2 divide-popover ring-2 ring-offset-4 dark:ring-offset-white/15 bg-slate-200  ring-slate-800    dark:bg-slate-800 rounded-xl p-2 gap-2 my-3">
+                      <div className="text-2xl flex flex-row p-1 justify-center ">
                         UPDATE USER
                       </div>
                       <form
-                        className="grid  grid-cols-1 mx-2 place-items-center sm:grid-cols-2  sm:justify-between  dark:bg-slate-800 rounded-xl p-2 gap-2 mt-4 mb-3"
+                        className="grid grid-cols-1 mx-2 place-items-center sm:grid-cols-2 text-slate-800 sm:justify-between  dark:bg-slate-800  p-2 gap-2 mt-4 mb-3"
                         onSubmit={(e) => {
                           e.preventDefault();
                           handleSubmit(e);
@@ -165,7 +170,7 @@ export default function UserManagementPage() {
                       >
                         <div>
                           <label
-                            className="text-slate-100 text-left ml-2 dark:text-slate-200 block mb-2"
+                            className="text-slate-900 text-left ml-2 dark:text-slate-200 block mb-2"
                             htmlFor="name"
                           >
                             Name
@@ -173,7 +178,7 @@ export default function UserManagementPage() {
                           <input
                             type="name"
                             id="name"
-                            className="form-input ml-2 dark:text-slate-900 dark:bg-slate-200 p-2 rounded-md"
+                            className="form-input ml-2  dark:text-slate-900 text-slate-950 dark:bg-slate-200 p-2 rounded-md"
                             name="name"
                             value={updatedUser?.name || ""}
                             onChange={handleInputChange}
@@ -182,7 +187,7 @@ export default function UserManagementPage() {
 
                         <div>
                           <label
-                            className="text-slate-100 text-left ml-2 dark:text-slate-200 block mb-2"
+                            className=" text-slate-900 text-left ml-2 dark:text-slate-200 block mb-2"
                             htmlFor="email"
                           >
                             Email
@@ -190,7 +195,7 @@ export default function UserManagementPage() {
                           <input
                             type="email"
                             id="email"
-                            className="form-input  dark:text-slate-900 ml-2 dark:bg-slate-200 p-2 rounded-md"
+                            className="form-input text-slate-900 dark:text-slate-900 ml-2 dark:bg-slate-200 p-2 rounded-md"
                             name="email"
                             value={updatedUser?.email || ""}
                             onChange={handleInputChange}
@@ -199,7 +204,7 @@ export default function UserManagementPage() {
 
                         <div>
                           <label
-                            className="text-slate-100 text-left ml-2 dark:text-slate-200 block mb-2"
+                            className="text-slate-900 text-left ml-2 dark:text-slate-200 block mb-2"
                             htmlFor="city"
                           >
                             City
@@ -216,7 +221,7 @@ export default function UserManagementPage() {
 
                         <div>
                           <label
-                            className="text-slate-100 text-left ml-2 dark:text-slate-200 block mb-2"
+                            className="text-slate-900 text-left ml-2 dark:text-slate-200 block mb-2"
                             htmlFor="street"
                           >
                             Street
@@ -224,7 +229,7 @@ export default function UserManagementPage() {
                           <input
                             type="text"
                             id="street"
-                            className="form-input ml-2 dark:text-slate-900 dark:bg-slate-200 p-2 rounded-md"
+                            className="form-input ml-2 text-slate-900 dark:text-slate-900 dark:bg-slate-200 p-2 rounded-md"
                             name="address.street"
                             value={updatedUser?.address?.street || ""}
                             onChange={handleInputChange}
@@ -233,7 +238,7 @@ export default function UserManagementPage() {
 
                         <div>
                           <label
-                            className="text-slate-100 text-left ml-2 dark:text-slate-200 block mb-2"
+                            className="text-slate-900 text-left ml-2 dark:text-slate-200 block mb-2"
                             htmlFor="website"
                           >
                             Website
@@ -243,7 +248,7 @@ export default function UserManagementPage() {
                             placeholder="Website"
                             type="text"
                             id="website"
-                            className="form-input ml-2 dark:text-slate-900 dark:bg-slate-200 p-2 rounded-md"
+                            className="form-input ml-2 text-slate-900 dark:text-slate-900 dark:bg-slate-200 p-2 rounded-md"
                             name="website"
                             value={updatedUser?.website || ""}
                             onChange={handleInputChange}
@@ -252,7 +257,7 @@ export default function UserManagementPage() {
 
                         <div>
                           <label
-                            className="text-slate-100 text-left ml-2 dark:text-slate-200 block mb-2"
+                            className="text-slate-900 text-left ml-2 dark:text-slate-200 block mb-2"
                             htmlFor="companyname"
                           >
                             Company
@@ -271,7 +276,9 @@ export default function UserManagementPage() {
                           <button
                             type="submit"
                             title="Update"
-                            className=" p-1 min-h-[39px] mx-auto border-white/50 border-2 rounded-lg"
+                            name="UpdateUser"
+                            about="Update user"
+                            className=" p-1 min-h-[39px] text-slate-900 dark:text-slate-200 hover:bg-black/10 mx-auto dark:border-white/50 border-2 rounded-lg border-slate-400"
                           >
                             Update
                             {isUpdateLoading && (
@@ -288,7 +295,7 @@ export default function UserManagementPage() {
 
                 <Dialog>
                   <DialogTrigger onClick={() => setSelectedUser(user)}>
-                    <div className="p-1.5 border-white/50 border-2 rounded-full">
+                    <div className="p-1.5 dark:border-white/50 border-black/50 border-2 rounded-full">
                       <Trash size={20} />
                     </div>
                   </DialogTrigger>

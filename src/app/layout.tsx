@@ -27,9 +27,9 @@ export default function RootLayout({
         baseTheme: shadesOfPurple,
       }}
     >
-      <html className="dark" lang="en">
+      <html className="light" lang="en">
         <body
-          className={`antialiased noisesvg bg:slate-200 font-sans text-black dark:bg-slate-800 dark:text-white ${inter.variable}`}
+          className={`antialiased noisesvg bg:slate-200 font-sans text-black bg-slate-300 dark:bg-slate-800 dark:text-white ${inter.variable}`}
         >
           <main className="app">
             <Navbar />

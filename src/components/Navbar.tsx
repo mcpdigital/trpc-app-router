@@ -53,7 +53,7 @@ const Navbar = () => {
   return (
     <header
       className={
-        "body-font  text-gray-600 shadow bg-slate-400 dark:text-gray-300 dark: " +
+        "body-font  text-gray-300 shadow bg-slate-400 dark:text-gray-300  " +
         GRAD_GOTHAN_TB
       }
     >
@@ -88,14 +88,16 @@ const Navbar = () => {
               />
             </svg>
 
-            <span className="dark:text-gray-400 ml-3 text-xl">MCP Digital</span>
+            <span className="dark:text-gray-400 text-gray-400 ml-3 text-xl">
+              MCP Digital
+            </span>
           </a>
         </div>
         {/* Hamburger Menu */}
         <div className="md:hidden">
           <button
             title="button"
-            className=" flex flex-col items-left md:items-center px-3 py-2 border rounded text-gray-700 border-gray-700 hover:text-gray-900 hover:border-gray-900 dark:text-gray-300 dark:border-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 focus:outline-none focus:shadow-outline-blue active:bg-gray-200 dark:active:bg-gray-700 dark:hover:border-gray-100"
+            className=" flex flex-col items-left md:items-center px-3 py-2 border rounded text-gray-300 border-gray-700 hover:text-gray-900 hover:border-gray-900 dark:text-gray-300 dark:border-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 focus:outline-none focus:shadow-outline-blue active:bg-gray-200 dark:active:bg-gray-700 dark:hover:border-gray-100"
             onClick={() => {
               const navElement = document.getElementById("nav");
               if (navElement) {
@@ -127,7 +129,7 @@ const Navbar = () => {
                 !link.role.length) && (
                 <Link key={link.title} href={link.url}>
                   {/* Use a div instead of an anchor tag */}
-                  <div className="z-0 mr-5 cursor-pointer hover:text-gray-900 dark:hover:text-gray-100 ">
+                  <div className="z-0 mr-5 cursor-pointer  dark:hover:text-gray-100 hover:text-gray-100">
                     {link.title}
                   </div>
                 </Link>
@@ -144,10 +146,10 @@ const Navbar = () => {
                   !link.role.length
               ) && (
                 <div key={group.title} className="relative group">
-                  <p className="mr-5 cursor-pointer hover:text-gray-900 dark:hover:text-gray-100">
+                  <p className="mr-5 cursor-pointer hover:text-gray-100 dark:hover:text-gray-100">
                     {group.title}
                   </p>
-                  <ul className="absolute hidden w-[160px] mt--1 text-sm space-y-2 bg-white rounded-md shadow-lg dark:bg-gray-800 dark:text-gray-300  group-hover:block ">
+                  <ul className="absolute hidden w-[160px] mt--1 text-sm space-y-2 bg-gray-800 rounded-md shadow-lg dark:bg-gray-800 dark:text-gray-300 text-gray-300 group-hover:block ">
                     {group.links.map(
                       (link) =>
                         (link.role.includes(userRole) ||
@@ -157,10 +159,10 @@ const Navbar = () => {
                           !link.role.length) && (
                           <li
                             key={link.title}
-                            className="px-4 py-2  dark:hover:bg-gray-700 dark:hover:text-gray-200 dark:text-gray-200 rounded-md "
+                            className="px-4 py-2  dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-200 dark:text-gray-200 rounded-md "
                           >
                             <Link
-                              className="hover:text-gray-900 text-gray-200 dark:hover:text-gray-100 w-full h-full transition duration-150 ease-in-out rounded-md dark:text-gray-300"
+                              className="hover:text-blue-400 text-gray-200 dark:hover:text-gray-100 w-full h-full transition duration-150 ease-in-out rounded-md dark:text-gray-300"
                               href={link.url}
                             >
                               {link.title}
