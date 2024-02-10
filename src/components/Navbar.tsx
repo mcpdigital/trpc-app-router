@@ -43,11 +43,8 @@ const Navbar = () => {
     {
       title: "Users",
       links: [
-        { title: "CRUD", url: "/crud", role: "" },
-        { title: "Users List", url: "/userlist", role: "" },
-        { title: "Delete User", url: "/deleteuser", role: "" },
-        { title: "Create User", url: "/createuser", role: "" },
-        { title: "Update User", url: "/updateuser", role: "" },
+        { title: "Create", url: "/createuser", role: "" },
+        { title: "Read/Update/Delete", url: "/crud", role: "" },
       ],
       role: "org:admin",
     },
@@ -60,7 +57,7 @@ const Navbar = () => {
         GRAD_GOTHAN_TB
       }
     >
-      <div className="container md:mx-auto flex  flex-wrap md:items-center justify-between p-5 md:flex-wrap md:items-left md:justify-between md:p-5 md:flex-row">
+      <div className="z-0 container md:mx-auto flex  flex-wrap md:items-center justify-between p-5 md:flex-wrap md:items-left md:justify-between md:p-5 md:flex-row">
         <div className="flex md:items-center">
           <a
             href="/"
@@ -121,7 +118,7 @@ const Navbar = () => {
         </div>
         <nav
           id="nav"
-          className="flex flex-col md:flex-row  md:items-start text-base md:ml-auto md:mr-auto flex-hidden md:flex "
+          className="z-10 flex flex-col md:flex-row  md:items-start text-base md:ml-auto md:mr-auto flex-hidden md:flex "
         >
           {links.map(
             (link) =>
@@ -130,7 +127,7 @@ const Navbar = () => {
                 !link.role.length) && (
                 <Link key={link.title} href={link.url}>
                   {/* Use a div instead of an anchor tag */}
-                  <div className="mr-5 cursor-pointer hover:text-gray-900 dark:hover:text-gray-100 ">
+                  <div className="z-0 mr-5 cursor-pointer hover:text-gray-900 dark:hover:text-gray-100 ">
                     {link.title}
                   </div>
                 </Link>
@@ -150,7 +147,7 @@ const Navbar = () => {
                   <p className="mr-5 cursor-pointer hover:text-gray-900 dark:hover:text-gray-100">
                     {group.title}
                   </p>
-                  <ul className="absolute hidden w-[140px] mt--1 text-sm space-y-2 bg-white rounded-md shadow-lg dark:bg-gray-800 dark:text-gray-300  group-hover:block ">
+                  <ul className="absolute hidden w-[160px] mt--1 text-sm space-y-2 bg-white rounded-md shadow-lg dark:bg-gray-800 dark:text-gray-300  group-hover:block ">
                     {group.links.map(
                       (link) =>
                         (link.role.includes(userRole) ||

@@ -14,7 +14,7 @@ const ShowGrads = () => (
             href="https://hypercolor.dev"
             className={
               GRAD_OCEANIC +
-              " test-center bg-orange-600  bg-clip-text text-transparent underline"
+              " text-center bg-orange-600  bg-clip-text text-transparent underline"
             }
           >
             HYPERCOLOR.DEV

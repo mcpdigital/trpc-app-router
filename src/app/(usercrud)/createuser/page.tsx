@@ -2,6 +2,8 @@
 import { useRef } from "react";
 import { trpc } from "@/lib/trpc/trpc-client";
 import { CreateUserData } from "@/types/types";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function CreateUserPage() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -38,11 +40,24 @@ export default function CreateUserPage() {
     }
 
     // Now you can use newUser to make your API call
-    createUserMutation.mutate(newUser as CreateUserData);
+    createUserMutation.mutate(newUser as CreateUserData, {
+      onSuccess: () => {
+        // Clear the form
+        formRef.current?.reset();
+
+        // Show a success toast
+        toast.success("User created successfully!", { autoClose: 2000 });
+      },
+      onError: () => {
+        // Show an error toast
+        toast.error("Failed to create user.");
+      },
+    });
   };
 
   return (
     <div className="flex flex-col mx-auto mt-4 p-4 items-center dark:text-slate-200">
+      <ToastContainer position="top-center" />
       <h1 className="p-4 text-4xl">Create User</h1>
       <form
         ref={formRef}
