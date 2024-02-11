@@ -33,7 +33,6 @@ export default function RootLayout({
         <body
           className={` dark antialiased noisesvg  font-sans text-black bg-slate-300 dark:bg-slate-800 dark:text-white ${inter.variable}`}
         >
-          {" "}
           <Providers>
             <main className="app">
               <Navbar />
