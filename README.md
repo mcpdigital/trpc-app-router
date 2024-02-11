@@ -1,6 +1,6 @@
-# Next.js Application with TRPC, Prisma, Clerk, and Tailwind CSS
+# Next.js 14.1 Application with TRPC, Prisma, Clerk, and Tailwind CSS
 
-This is a full-stack small application for my learning, built using a modern tech stack of Node.js, Next.js, React, tRPC, Prisma, Clerk, and Tailwind CSS. The application features a minimal CRUD interface for a `UserData` schema, which corresponds to the data structure returned by the [JSONPlaceholder API](https://jsonplaceholder.typicode.com/users).
+This is a full-stack small application for my learning, built using a modern tech stack of Node.js, Next.js, React, tRPC, Prisma, Clerk, and Tailwind CSS. The application features a CRUD interface for a `UserData` schema, which corresponds to the data structure returned by the [JSONPlaceholder API](https://jsonplaceholder.typicode.com/users).
 
 ## Tech Stack
 
@@ -11,6 +11,7 @@ This is a full-stack small application for my learning, built using a modern tec
 - **Prisma**: An open-source database toolkit.
 - **Clerk**: A complete user management solution.
 - **Tailwind CSS**: A utility-first CSS framework for rapidly building custom designs.
+- **Shadcn**: An UI component library for creating beautiful and interactive user interfaces.
 
 ## Features
 
@@ -35,7 +36,7 @@ The application is deployed on Vercel. To deploy your own version, you can follo
 
 ## Database
 
-The application uses a MySQL database hosted on PlanetScale.
+The application uses a MySQL database hosted at PlanetScale.
 
 ## Contributing
 

@@ -17,12 +17,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  GRAD_BLUESTEEL,
-  GRAD_BUTTON1,
-  GRAD_OCEANIC,
-  GRAD_PANDORA,
-} from "@/tw_gradients";
+import { GRAD_OCEANIC, GRAD_PANDORA } from "@/tw_gradients";
 import { DialogClose } from "@radix-ui/react-dialog";
 
 export default function UserManagementPage() {
@@ -31,7 +26,7 @@ export default function UserManagementPage() {
   const usersQuery = trpc.userData.getUserData.useQuery();
   const updateUserMutation = trpc.userData.updateUserData.useMutation();
   const deleteUserMutation = trpc.userData.deleteUserData.useMutation();
-  const [isFormVisible, setIsFormVisible] = useState(true);
+  // const [isFormVisible, setIsFormVisible] = useState(true);
   const [isUpdateLoading, setIsUpdateLoading] = useState(false);
   const [isDeleteLoading, setIsDeleteLoading] = useState(false);
 
@@ -73,7 +68,7 @@ export default function UserManagementPage() {
           setIsUpdateLoading(false);
           setUpdatedUser(null); // clear the form
           setSelectedUser(null); // close the dialog
-          setIsFormVisible(false); // hide the form
+          //setIsFormVisible(false); // hide the form
         },
       }
     );
@@ -127,7 +122,7 @@ export default function UserManagementPage() {
         {usersQuery.data?.map((user) => (
           <div
             key={user.id}
-            className=" dark:text-slate-200 text-slate-800 bg-slate-200 dark:bg-slate-600  p-3  drop-shadow-lg  border-gray-600 dark:border-gray-700 dark:bg-gradient-to-r dark:from-gray-900 dark:via-gray-950  dark:to-gray-950 bg-gradient-to-bl from-gray-600 via-gray-500  to-gray-600 rounded-xl"
+            className=" dark:text-slate-200 text-slate-800 bg-slate-200 dark:bg-slate-600  p-0.5  drop-shadow-lg  border-gray-600 dark:border-gray-700 dark:bg-gradient-to-r dark:from-gray-800 dark:via-blue-800  dark:to-gray-800 bg-gradient-to-bl from-gray-600 via-gray-500  to-gray-600 rounded-xl  dark:divide-slate-500 divide-x-2 shadow-lg"
           >
             {/* Display user information */}
             {/* Display user information */}
@@ -135,7 +130,7 @@ export default function UserManagementPage() {
               <div
                 className={
                   GRAD_OCEANIC +
-                  " dark:bg-gradient-to-t bg-gradient-to-br dark:from-green-200 dark:via-green-400 dark:to-purple-700 text-2xl font-bold truncate text-center bg-orange-600  bg-clip-text text-transparent "
+                  " dark:bg-gradient-to-t bg-gradient-to-br dark:from-green-200 dark:via-green-400 dark:to-purple-700 text-2xl font-bold truncate text-center bg-orange-600  bg-clip-text text-transparent mb-2  "
                 }
               >
                 {user.name}
