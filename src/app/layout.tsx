@@ -31,7 +31,7 @@ export default function RootLayout({
     >
       <html lang="en">
         <body
-          className={` dark antialiased noisesvg  font-sans text-black bg-slate-300 dark:bg-slate-800 dark:text-white ${inter.variable}`}
+          className={` dark antialiased noisesvg  font-sans text-black bg-slate-300 dark:bg-slate-800 dark:text-white/75 ${inter.variable}`}
         >
           <Providers>
             <main className="app">

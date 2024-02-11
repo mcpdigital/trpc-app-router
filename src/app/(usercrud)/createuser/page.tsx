@@ -56,13 +56,16 @@ export default function CreateUserPage() {
   };
 
   return (
-    <div className="flex flex-col mx-auto mt-4 p-4 items-center dark:text-slate-200">
+    <div
+      className="flex flex-col mx-auto mt-4 p-4 items-center dark:text-slate-200 dark:bg-slate-800 bg-slate-400 rounded-lg gap-4"
+      style={{ minHeight: "calc(85vh - 60px)" }}
+    >
       <ToastContainer position="top-center" />
       <h1 className="p-4 text-4xl">Create User</h1>
       <form
         ref={formRef}
         onSubmit={handleSubmit}
-        className="dark:text-slate-300 dark:bg-slate-700 mt-4 p-4 rounded-lg gap-4  mx-auto flex flex-col "
+        className="dark:text-slate-300 dark:bg-slate-700 bg-slate-600 text-slate-200 mt-4 p-4 rounded-lg gap-4  mx-auto flex flex-col "
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
@@ -73,35 +76,35 @@ export default function CreateUserPage() {
           <h2 className="dark:text-slate-300">User Information</h2>
           <hr />
           <input
-            className="dark:text-slate-900 p-2"
+            className="dark:text-slate-900 text-slate-900 p-2"
             type="text"
             name="name"
             placeholder="Name"
             autoComplete="off"
           />
           <input
-            className="dark:text-slate-900 p-2"
+            className="dark:text-slate-900 text-slate-900 p-2"
             type="text"
             name="email"
             placeholder="Email"
             autoComplete="off"
           />
           <input
-            className="dark:text-slate-900 p-2"
+            className="dark:text-slate-900 text-slate-900 p-2"
             type="text"
             name="username"
             placeholder="Username"
             autoComplete="off"
           />
           <input
-            className="dark:text-slate-900 p-2"
+            className="dark:text-slate-900 text-slate-900 p-2"
             type="text"
             name="phone"
             placeholder="Phone"
             autoComplete="off"
           />
           <input
-            className="dark:text-slate-900 p-2"
+            className="dark:text-slate-900 text-slate-900 p-2"
             type="text"
             name="avatar"
             placeholder="Avatar"
@@ -113,42 +116,42 @@ export default function CreateUserPage() {
           <h2 className="dark:text-slate-300 mt-4">Address Information</h2>
           <hr />
           <input
-            className="dark:text-slate-900 p-2"
+            className="dark:text-slate-900 text-slate-900 p-2"
             type="text"
             name="address.street"
             placeholder="Street"
             autoComplete="off"
           />
           <input
-            className="dark:text-slate-900 p-2"
+            className="dark:text-slate-900 text-slate-900 p-2"
             type="text"
             name="address.suite"
             placeholder="Suite"
             autoComplete="off"
           />
           <input
-            className="dark:text-slate-900 p-2"
+            className="dark:text-slate-900 text-slate-900 p-2"
             type="text"
             name="address.city"
             placeholder="City"
             autoComplete="off"
           />
           <input
-            className="dark:text-slate-900 p-2"
+            className="dark:text-slate-900 text-slate-900 p-2"
             type="text"
             name="address.zipcode"
             placeholder="Zipcode"
             autoComplete="off"
           />
           <input
-            className="dark:text-slate-900 p-2"
+            className="dark:text-slate-900 text-slate-900 p-2"
             type="text"
             name="address.geo.lat"
             placeholder="Latitude"
             autoComplete="off"
           />
           <input
-            className="dark:text-slate-900 p-2"
+            className="dark:text-slate-900 text-slate-900 p-2"
             type="text"
             name="address.geo.lng"
             placeholder="Longitude"
@@ -160,21 +163,21 @@ export default function CreateUserPage() {
           <h2 className="dark:text-slate-300 mt-4">Company Information</h2>
           <hr />
           <input
-            className="dark:text-slate-900 p-2"
+            className="dark:text-slate-900 text-slate-900 p-2"
             type="text"
             name="company.name"
             placeholder="Company Name"
             autoComplete="off"
           />
           <input
-            className="dark:text-slate-900 p-2"
+            className="dark:text-slate-900 text-slate-900 p-2"
             type="text"
             name="company.catchPhrase"
             placeholder="Catch Phrase"
             autoComplete="off"
           />
           <input
-            className="dark:text-slate-900 p-2"
+            className="dark:text-slate-900 text-slate-900 p-2"
             type="text"
             name="company.bs"
             placeholder="BS"
@@ -184,7 +187,7 @@ export default function CreateUserPage() {
 
         <button
           type="submit"
-          className="dark:text-slate-300 text-gray-900 p-2 rounded-2xl bg-slate-800 hover:bg-slate-950 active:bg-slate-900 my-40 mx-20"
+          className="dark:text-slate-900 dark:hover:text-slate-200 dark:active-text-slate-200 text-gray-900 p-2 rounded-2xl bg-slate-200 hover:bg-slate-100 dark:hover:bg-slate-950 active:bg-slate-100 my-40 mx-20 border-2 border-slate-300 dark:border-slate-800 hover:border-slate-200 dark:hover:border-slate-900 active:border-slate-900 dark:active:border-slate-200"
         >
           Create User
         </button>
