@@ -4,13 +4,14 @@ import Link from "next/link";
 import { SignedOut, UserButton, SignedIn, useSession } from "@clerk/nextjs";
 import { checkUserRole } from "../utils/userUtils";
 import { GRAD_GOTHAN_TB } from "@/tw_gradients";
+import ThemeSwitcher from "@/components/appui/ThemeSwitcher";
 
 const Navbar = () => {
   const { session } = useSession();
   const userRole = checkUserRole(session);
 
   const links = [
-    { title: "Admin Dashboard", url: "/admin", role: "org:admin" },
+    { title: "Dashboard", url: "/admin", role: "org:admin" },
 
     // Add more placeholder links as needed
   ];
@@ -176,6 +177,7 @@ const Navbar = () => {
           )}
         </nav>
         <div className="items-center md:flex">
+          <ThemeSwitcher />
           <SignedOut>
             <a href="/sign-in">
               <button className="mr-4 w-[90px] rounded border-0 bg-indigo-500 px-4 py-2 text-base text-white hover:bg-indigo-600 focus:outline-none">

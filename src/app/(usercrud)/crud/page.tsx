@@ -158,7 +158,7 @@ export default function UserManagementPage() {
                   {updatedUser && (
                     <DialogContent className="  divide-y-2 divide-popover ring-2 ring-offset-4 dark:ring-offset-white/15 bg-slate-200  ring-slate-800    dark:bg-slate-800 rounded-xl p-2 gap-2 my-3">
                       <div className="text-2xl flex flex-row p-1 justify-center ">
-                        UPDATE USER
+                        Udate User Info
                       </div>
                       <form
                         className="grid grid-cols-1 mx-2 place-items-center sm:grid-cols-2 text-slate-800 sm:justify-between  dark:bg-slate-800  p-2 gap-2 mt-4 mb-3"
@@ -278,7 +278,7 @@ export default function UserManagementPage() {
                             title="Update"
                             name="UpdateUser"
                             about="Update user"
-                            className=" p-1 min-h-[39px] text-slate-900 dark:text-slate-200 hover:bg-black/10 mx-auto dark:border-white/50 border-2 rounded-lg border-slate-400"
+                            className=" p-1 min-h-[39px] text-slate-900 dark:text-slate-200 hover:bg-black/10 dark:hover:bg-white/10 mx-auto dark:border-white/50 border-2 rounded-lg border-slate-400"
                           >
                             Update
                             {isUpdateLoading && (
@@ -300,9 +300,9 @@ export default function UserManagementPage() {
                     </div>
                   </DialogTrigger>
 
-                  <DialogContent>
+                  <DialogContent className="ring-2 ring-offset-4 dark:ring-offset-white/15 bg-slate-200  ring-slate-800    dark:bg-slate-800 rounded-xl p-2 gap-2 my-3">
                     <p>Are you sure you want to delete this user?</p>
-                    <div className="flex mt-12 gap-2 justify-evenly ">
+                    <div className="flex mt-12 gap-2 justify-evenly dark:text-slate-200 text-slate-900">
                       <button
                         onClick={() => handleDelete(user.id)}
                         title="Delete"
