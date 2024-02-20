@@ -6,6 +6,7 @@ import Navbar from ".././components/Navbar";
 import { TRPCReactQueryProvider } from "@/components/providers/trpc-provider";
 import Footer from ".././components/Footer";
 import { shadesOfPurple } from "@clerk/themes";
+import ThemeProvider from "@/components/providers/theme-provider";
 
 import Providers from "@/components/providers/theme-provider";
 const inter = Inter({
@@ -29,19 +30,21 @@ export default function RootLayout({
         baseTheme: shadesOfPurple,
       }}
     >
-      <html lang="en">
+      <html data-theme="dark" lang="en">
         <body
-          className={` dark antialiased noisesvg  font-sans text-black bg-slate-300 dark:bg-slate-800 dark:text-white/75 ${inter.variable}`}
+          className={` antialiased noisesvg  font-sans text-black bg-slate-300 dark:bg-slate-800 dark:text-white/75 ${inter.variable}`}
         >
-          <Providers>
-            <main className="app">
-              <Navbar />
+          <ThemeProvider>
+            <Providers>
+              <main className="app">
+                <Navbar />
 
-              <TRPCReactQueryProvider>{children}</TRPCReactQueryProvider>
+                <TRPCReactQueryProvider>{children}</TRPCReactQueryProvider>
 
-              <Footer />
-            </main>
-          </Providers>
+                <Footer />
+              </main>
+            </Providers>
+          </ThemeProvider>
         </body>
       </html>
     </ClerkProvider>

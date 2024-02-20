@@ -30,7 +30,7 @@ const ThemeSwitcher = () => {
       <Switch
         checked={theme === "light"}
         onCheckedChange={() => setTheme(theme === "light" ? "dark" : "light")}
-        className="relative mb-2 md:mb-0 h-6 rounded-full w-11 dark:bg-gray-600   transition duration-150 ease-in-out  bg-gray-200 "
+        className="relative md:mt-1 mt-0 md:mb-0 h-5  rounded-full w-10 dark:bg-gray-600 bg-gray-400 transition duration-150 ease-in-out   "
       />
     </div>
   );

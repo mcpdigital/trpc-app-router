@@ -3,7 +3,7 @@ import React from "react";
 import Link from "next/link";
 import { SignedOut, UserButton, SignedIn, useSession } from "@clerk/nextjs";
 import { checkUserRole } from "../utils/userUtils";
-import { GRAD_GOTHAN_TB } from "@/tw_gradients";
+import { GRAD_GOTHAN_TB, GRAD_GUNMETAL } from "@/tw_gradients";
 import ThemeSwitcher from "@/components/appui/ThemeSwitcher";
 
 const Navbar = () => {
@@ -54,11 +54,10 @@ const Navbar = () => {
   return (
     <header
       className={
-        "body-font  text-gray-300 shadow bg-slate-400 dark:text-gray-300  " +
-        GRAD_GOTHAN_TB
+        "bg-gradient-to-r from-gray-200 via-gray-400 to-gray-600  body-font  text-gray-300 shadow bg-slate-400 dark:text-gray-300  dark:bg-gradient-to-b dark:from-gray-800 dark:via-gray-900 dark:to-black "
       }
     >
-      <div className="z-0 container md:mx-auto flex  flex-wrap md:items-center justify-between p-5 md:flex-wrap md:items-left md:justify-between md:p-5 md:flex-row">
+      <div className="z-0 container md:mx-auto flex text-gray-900 dark:text-gray-200 flex-wrap md:items-center justify-between p-5 md:flex-wrap md:items-left md:justify-between md:p-5 md:flex-row">
         <div className="flex md:items-center">
           <a
             href="/"
@@ -89,7 +88,7 @@ const Navbar = () => {
               />
             </svg>
 
-            <span className="dark:text-gray-400 text-gray-400 ml-3 text-xl">
+            <span className="dark:text-gray-400 text-gray-700 ml-3 text-xl">
               MCP Digital
             </span>
           </a>
