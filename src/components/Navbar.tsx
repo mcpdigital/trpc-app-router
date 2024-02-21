@@ -5,12 +5,14 @@ import { SignedOut, UserButton, SignedIn, useSession } from "@clerk/nextjs";
 import { checkUserRole } from "../utils/userUtils";
 import { GRAD_GOTHAN_TB, GRAD_GUNMETAL } from "@/tw_gradients";
 import ThemeSwitcher from "@/components/appui/ThemeSwitcher";
+import MobileNav from "./MobileNav";
+import { Menu } from "lucide-react";
 
 const Navbar = () => {
   const { session } = useSession();
   const userRole = checkUserRole(session);
 
-  const links = [
+  const navlinks = [
     { title: "Dashboard", url: "/admin", role: "org:admin" },
 
     // Add more placeholder links as needed
@@ -19,7 +21,7 @@ const Navbar = () => {
   const groupedLinks = [
     {
       title: "HTML & CSS",
-      links: [
+      navlinks: [
         { title: "TW Gradients", url: "/twgrads", role: "" },
         { title: "ui-assets", url: "/ui-assets", role: "" },
       ],
@@ -27,7 +29,7 @@ const Navbar = () => {
     },
     {
       title: "OpenAI",
-      links: [
+      navlinks: [
         { title: "GPT", url: "/gpt", role: "org:ai" },
         { title: "DALL-E", url: "/DALL-E", role: "org:ai" },
       ],
@@ -35,7 +37,7 @@ const Navbar = () => {
     },
     {
       title: "Clerk",
-      links: [
+      navlinks: [
         { title: "Profile", url: "/profile", role: "org:member" },
         { title: "User", url: "/user", role: "org:member" },
       ],
@@ -43,7 +45,7 @@ const Navbar = () => {
     },
     {
       title: "Users",
-      links: [
+      navlinks: [
         { title: "Create", url: "/createuser", role: "" },
         { title: "Read/Update/Delete", url: "/crud", role: "" },
       ],
@@ -57,8 +59,8 @@ const Navbar = () => {
         "bg-gradient-to-r from-gray-200 via-gray-400 to-gray-600  body-font  text-gray-300 shadow bg-slate-400 dark:text-gray-300  dark:bg-gradient-to-b dark:from-gray-800 dark:via-gray-900 dark:to-black "
       }
     >
-      <div className="z-0 container md:mx-auto flex text-gray-900 dark:text-gray-200 flex-wrap md:items-center justify-between p-5 md:flex-wrap md:items-left md:justify-between md:p-5 md:flex-row">
-        <div className="flex md:items-center">
+      <div className=" container md:mx-auto flex text-gray-900 dark:text-gray-200 flex-wrap md:items-center justify-between p-5 md:flex-wrap md:items-left md:justify-between md:p-5 md:flex-row">
+        <div className="md:flex md:items-center">
           <a
             href="/"
             className="title-font flex items-center font-medium text-gray-900"
@@ -93,43 +95,19 @@ const Navbar = () => {
             </span>
           </a>
         </div>
-        {/* Hamburger Menu */}
-        <div className="md:hidden">
-          <button
-            title="button"
-            className=" flex flex-col items-left md:items-center px-3 py-2 border rounded text-gray-300 border-gray-700 hover:text-gray-900 hover:border-gray-900 dark:text-gray-300 dark:border-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 focus:outline-none focus:shadow-outline-blue active:bg-gray-200 dark:active:bg-gray-700 dark:hover:border-gray-100"
-            onClick={() => {
-              const navElement = document.getElementById("nav");
-              if (navElement) {
-                navElement.classList.toggle("hidden");
-              }
-            }}
-          >
-            <svg
-              className="h-3 w-3"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path d="M4 6h16M4 12h16m-7 6h7"></path>
-            </svg>
-          </button>
-        </div>
+
         <nav
           id="nav"
-          className="z-10 flex flex-col md:flex-row  md:items-start text-base md:ml-auto md:mr-auto flex-hidden md:flex "
+          className=" flex-col md:flex-row  md:items-start text-base md:ml-auto md:mr-auto hidden md:flex "
         >
-          {links.map(
+          {navlinks.map(
             (link) =>
               (link.role.includes(userRole) ||
                 userRole?.includes("org:admin") ||
                 !link.role.length) && (
                 <Link key={link.title} href={link.url}>
                   {/* Use a div instead of an anchor tag */}
-                  <div className="z-0 mr-5 cursor-pointer  dark:hover:text-gray-100 hover:text-gray-100">
+                  <div className=" mr-5 cursor-pointer  dark:hover:text-gray-100 hover:text-gray-100">
                     {link.title}
                   </div>
                 </Link>
@@ -137,7 +115,7 @@ const Navbar = () => {
           )}
           {groupedLinks.map(
             (group) =>
-              group.links.some(
+              group.navlinks.some(
                 (link) =>
                   link.role.includes(userRole) ||
                   (link.role.includes("org:member") &&
@@ -150,7 +128,7 @@ const Navbar = () => {
                     {group.title}
                   </p>
                   <ul className="absolute hidden w-[160px] mt--1 text-sm space-y-2 bg-gray-800 rounded-md shadow-lg dark:bg-gray-800 dark:text-gray-300 text-gray-300 group-hover:block ">
-                    {group.links.map(
+                    {group.navlinks.map(
                       (link) =>
                         (link.role.includes(userRole) ||
                           (link.role.includes("org:member") &&
@@ -175,26 +153,38 @@ const Navbar = () => {
               )
           )}
         </nav>
-        <div className="items-center md:flex">
-          <ThemeSwitcher />
-          <SignedOut>
-            <a href="/sign-in">
-              <button className="mr-4 w-[90px] rounded border-0 bg-indigo-500 px-4 py-2 text-base text-white hover:bg-indigo-600 focus:outline-none">
-                Login
-              </button>
-            </a>
-            <a href="/sign-up">
-              <button className="w-[90px] rounded border-0 bg-indigo-500 px-4 py-2 text-base text-white hover:bg-indigo-600 focus:outline-none">
-                Sign Up
-              </button>
-            </a>
-          </SignedOut>
+        <div className="items-center  md:flex">
+          <div className="hidden md:flex">
+            <ThemeSwitcher />
+            <SignedOut>
+              <a href="/sign-in">
+                <button className="mr-4 w-[90px] rounded border-0 bg-indigo-500 px-4 py-2 text-base text-white hover:bg-indigo-600 focus:outline-none">
+                  Login
+                </button>
+              </a>
+              <a href="/sign-up">
+                <button className="w-[90px] rounded border-0 bg-indigo-500 px-4 py-2 text-base text-white hover:bg-indigo-600 focus:outline-none">
+                  Sign Up
+                </button>
+              </a>
+            </SignedOut>
+          </div>
+
           <SignedIn>
-            <div className="ml-4 flex flex-col items-center text-[10px]">
+            <div className="md:mr-4 mr-8 md:flex flex-col hidden items-center text-[10px]">
               <UserButton afterSignOutUrl="/" />
               <p className="mt-1">{userRole}</p>
             </div>
           </SignedIn>
+          {/* Hamburger Menu */}
+          <div className=" md:hidden mr-6">
+            <MobileNav
+              navlinks={navlinks}
+              nestedlinks={groupedLinks}
+              userRole={userRole}
+            />
+            {/* <path d="M4 6h16M4 12h16m-7 6h7"></path> */}
+          </div>
         </div>
       </div>
     </header>
