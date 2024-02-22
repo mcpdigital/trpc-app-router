@@ -123,22 +123,26 @@ export default function UserManagementPage() {
           {usersQuery.data?.map((user) => (
             <div
               key={user.id}
-              className=" dark:text-slate-200 text-slate-800 bg-slate-200 dark:bg-slate-600  p-0.5  drop-shadow-lg  border-gray-600 dark:border-gray-700 dark:bg-gradient-to-r dark:from-gray-800 dark:via-blue-800  dark:to-gray-800 bg-gradient-to-bl from-gray-600 via-gray-500  to-gray-600 rounded-xl  dark:divide-slate-500 divide-x-2 shadow-lg"
+              className=" dark:text-slate-200 text-slate-800 bg-slate-200 dark:bg-slate-600  p-0.5  drop-shadow-lg  border-gray-600 dark:border-gray-700 dark:bg-gradient-to-r dark:from-gray-800 dark:via-blue-800  dark:to-gray-800 bg-gradient-to-bl from-gray-600 via-gray-500  to-gray-600 rounded-xl  dark:divide-slate-500 divide-x-2 shadow-lg grainy"
             >
               {/* Display user information */}
               {/* Display user information */}
-              <div className="dark:text-slate-300 text-slate-800 min-h-full bg-slate-200 dark:bg-slate-600 p-2 rounded-lg  dark:bg-gradient-to-tr dark:from-blue-900 dark:via-blue-900  dark:to-blue-950 bg-gradient-to-tr from-slate-400 via-slate-300  to-slate-400 shadow-inner">
+              <div className="dark:text-slate-300 text-slate-800 min-h-full bg-slate-200 dark:bg-slate-600 p-2 rounded-lg  dark:bg-gradient-to-tr dark:from-blue-900 dark:via-blue-900  dark:to-blue-950 bg-gradient-to-tr from-slate-400 via-slate-300  to-slate-400 shadow-inner grainy">
                 <div
                   className={
                     GRAD_OCEANIC +
-                    " dark:bg-gradient-to-t bg-gradient-to-br dark:from-green-200 dark:via-green-400 dark:to-purple-700 text-2xl font-bold truncate text-center bg-orange-600  bg-clip-text text-transparent mb-2  "
+                    " dark:bg-gradient-to-b bg-gradient-to-br dark:from-green-100 dark:via-green-400 dark:via-40% dark:to-purple-500 to-75% text-2xl font-bold truncate text-center bg-orange-600  bg-clip-text text-transparent mb-2  "
                   }
                 >
                   {user.name}
                 </div>
-                <div className="truncate">{user.email}</div>
-                <div className="truncate mt-2 text-lg">{user.address.city}</div>
-                <div className="flex  gap-2 justify-evenly mt-8">
+                <div className="truncate border-t pt-2 border-black/50  dark:border-white/50 ">
+                  {user.email}
+                </div>
+                <div className="truncate mt-2 pb-2 text-lg">
+                  {user.address.city}
+                </div>
+                <div className="flex   border-t pt-3 border-black/50  dark:border-white/30 gap-2 justify-evenly mt-8">
                   <Dialog>
                     <DialogTrigger
                       onClick={() => {
@@ -147,14 +151,14 @@ export default function UserManagementPage() {
                         //setIsFormVisible(true); // show the form
                       }}
                     >
-                      <div className="p-1.5 dark:border-white/50 border-black/50 border-2 rounded-full">
+                      <div className="p-1.5 dark:border-blue/50 border-blue-500 text-blue-700 dark:text-blue-400 border-2 rounded-full ring-1 hover:ring-2">
                         <Edit2Icon size={20} />
                       </div>
                     </DialogTrigger>
                     {updatedUser && (
                       <DialogContent className="  divide-y-2 divide-popover ring-2 ring-offset-4 dark:ring-offset-white/15 bg-slate-200  ring-slate-800    dark:bg-slate-800 rounded-xl p-2 gap-2 my-3">
                         <div className="text-2xl flex flex-row p-1 justify-center ">
-                          Udate User Info
+                          Update User Info
                         </div>
                         <form
                           className="grid grid-cols-1 mx-2 place-items-center sm:grid-cols-2 text-slate-800 sm:justify-between  dark:bg-slate-800  p-2 gap-2 mt-4 mb-3"
@@ -291,7 +295,7 @@ export default function UserManagementPage() {
 
                   <Dialog>
                     <DialogTrigger onClick={() => setSelectedUser(user)}>
-                      <div className="p-1.5 dark:border-white/50 border-black/50 border-2 rounded-full">
+                      <div className="p-1.5 dark:border-blue/50 border-blue-500 text-blue-700 dark:text-blue-400 border-2 rounded-full  ring-1 hover:ring-2">
                         <Trash size={20} />
                       </div>
                     </DialogTrigger>
