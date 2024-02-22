@@ -4,6 +4,7 @@ import Link from "next/link";
 import { SignedOut, UserButton, SignedIn, useSession } from "@clerk/nextjs";
 import { checkUserRole } from "../utils/userUtils";
 import { GRAD_GOTHAN_TB, GRAD_GUNMETAL } from "@/tw_gradients";
+import { ModeToggle } from "@/components/appui/mode-toggle";
 import ThemeSwitcher from "@/components/appui/ThemeSwitcher";
 import MobileNav from "./MobileNav";
 import { Menu } from "lucide-react";
@@ -155,6 +156,8 @@ const Navbar = () => {
         </nav>
         <div className="items-center  md:flex">
           <div className="hidden md:flex">
+            <ModeToggle />
+
             <ThemeSwitcher />
             <SignedOut>
               <a href="/sign-in">
