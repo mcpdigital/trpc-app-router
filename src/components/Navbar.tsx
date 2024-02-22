@@ -4,7 +4,7 @@ import Link from "next/link";
 import { SignedOut, UserButton, SignedIn, useSession } from "@clerk/nextjs";
 import { checkUserRole } from "../utils/userUtils";
 import { GRAD_GOTHAN_TB, GRAD_GUNMETAL } from "@/tw_gradients";
-import { ModeToggle } from "@/components/appui/mode-toggle";
+import { ModeToggle } from "@/components/appui/ModeToggle";
 import ThemeSwitcher from "@/components/appui/ThemeSwitcher";
 import MobileNav from "./MobileNav";
 import { Menu } from "lucide-react";
@@ -99,7 +99,7 @@ const Navbar = () => {
 
         <nav
           id="nav"
-          className=" flex-col md:flex-row  md:items-start text-base md:ml-auto md:mr-auto hidden md:flex "
+          className=" z-10 flex-col md:flex-row  md:items-start text-base md:ml-auto md:mr-auto hidden md:flex "
         >
           {navlinks.map(
             (link) =>
@@ -158,7 +158,6 @@ const Navbar = () => {
           <div className="hidden md:flex">
             <ModeToggle />
 
-            <ThemeSwitcher />
             <SignedOut>
               <a href="/sign-in">
                 <button className="mr-4 w-[90px] rounded border-0 bg-indigo-500 px-4 py-2 text-base text-white hover:bg-indigo-600 focus:outline-none">
@@ -174,7 +173,7 @@ const Navbar = () => {
           </div>
 
           <SignedIn>
-            <div className="md:mr-4 mr-8 md:flex flex-col hidden items-center text-[10px]">
+            <div className="md:mr-4 md:ml-2 mr-8 md:flex flex-col hidden items-center text-[10px]">
               <UserButton afterSignOutUrl="/" />
               <p className="mt-1">{userRole}</p>
             </div>

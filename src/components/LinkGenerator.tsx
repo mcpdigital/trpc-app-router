@@ -22,7 +22,7 @@ const LinkGenerator = ({ navlinks, userRole }: LinkGeneratorProps) => {
       return (
         <>
           <Link key={navlink.title} href={navlink.url}>
-            <div className="z-50 mr-5 cursor-pointer flex  dark:hover:text-gray-100 hover:text-gray-100">
+            <div className="z-50 mr-5 cursor-pointer flex  dark:hover:text-gray-100 hover:text-gray-900">
               {navlink.title}
             </div>
           </Link>

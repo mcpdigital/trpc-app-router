@@ -30,11 +30,11 @@ const NestedLinkGenerator = ({
       )
     ) {
       return (
-        <div key={group.title} className="relative group">
-          <p className="mr-5 cursor-pointer hover:text-gray-100 dark:hover:text-gray-100">
+        <div key={group.title} className=" relative group">
+          <p className="mr-5 cursor-pointer hover:text-gray-100 dark:hover:text-gray-100 dark:hover:bg-gray-800 hover:bg-gray-700 ">
             {group.title}
           </p>
-          <ul className="absolute hidden w-[160px] mt--1 text-sm space-y-2 bg-gray-800 rounded-md shadow-lg dark:bg-gray-800 dark:text-gray-300 text-gray-300 group-hover:block ">
+          <ul className="absolute hidden w-[160px] ml-24 text-sm space-y-2 bg-gray-800 rounded-md shadow-lg dark:bg-gray-800  dark:text-gray-300 text-gray-300 group-hover:block z-30">
             {group.navlinks.map((link) => {
               if (
                 link.role.includes(userRole) ||
@@ -46,7 +46,7 @@ const NestedLinkGenerator = ({
                 return (
                   <li
                     key={link.title}
-                    className=" z-50 px-4 py-2  dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-200 dark:text-gray-200 rounded-md "
+                    className="  px-4 py-2  dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-200 dark:text-gray-200 rounded-md block"
                   >
                     <Link
                       className="hover:text-blue-400 text-gray-200 dark:hover:text-gray-100 w-full h-full transition duration-150 ease-in-out rounded-md dark:text-gray-300"

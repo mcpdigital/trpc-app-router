@@ -45,11 +45,11 @@ const MobileNav = ({ navlinks, nestedlinks, userRole }: MobileNavProps) => {
     <div className="md:hidden ">
       <Menu
         onClick={toggleOpen}
-        className="  absolute z-50 h-6 w-6 hover:text-zinc-200 text-zinc-700 dark:text-slate-400 dark:hover:text-slate-200"
+        className=" z-20 absolute h-6 w-6 hover:text-zinc-200 text-zinc-700 dark:text-slate-400 dark:hover:text-slate-200"
       />
 
       {isOpen ? (
-        <div className="fixed animate-in slide-in-from-top-5 fade-in-20 inset-0 z-0 w-full">
+        <div className=" z-10 fixed animate-in slide-in-from-top-5 fade-in-20 inset-0 w-full">
           <ul className="absolute bg-white border-b dar:text-slate-200 dark:bg-slate-900  border-zinc-200 shadow-xl grid w-full gap-3 px-10 pt-20 pb-8">
             {!userRole ? (
               <>
