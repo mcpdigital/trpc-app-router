@@ -278,7 +278,7 @@ export default function UserManagementPage() {
                             >
                               Update
                               {isUpdateLoading && (
-                                <div className="fixed col-span-2  justify-center -mt-[35%]">
+                                <div className="fixed col-span-2  justify-center sm:-mt-[40%] -mt-[60%]">
                                   <Loading />
                                 </div>
                               )}
@@ -296,9 +296,9 @@ export default function UserManagementPage() {
                       </div>
                     </DialogTrigger>
 
-                    <DialogContent className="ring-2 ring-offset-4 dark:ring-offset-white/15 bg-slate-200  ring-slate-800    dark:bg-slate-800 rounded-xl p-2 gap-2 my-3">
+                    <DialogContent className=" resize-none ring-2 ring-offset-4 dark:ring-offset-white/15 bg-slate-200  ring-slate-800    dark:bg-slate-800 rounded-xl p-2 gap-2 my-3">
                       <p>Are you sure you want to delete this user?</p>
-                      <div className="flex mt-12 gap-2 justify-evenly dark:text-slate-200 text-slate-900">
+                      <div className="flex resize-none mt-12 gap-2 justify-evenly dark:text-slate-200 text-slate-900">
                         <button
                           onClick={() => handleDelete(user.id)}
                           title="Delete"
@@ -306,7 +306,7 @@ export default function UserManagementPage() {
                         >
                           Yes
                         </button>
-                        <div className="items-center justify-center">
+                        <div className="absolute -mt-10 justify-center">
                           {isDeleteLoading && <Loading />}
                         </div>
                         <DialogClose asChild>
