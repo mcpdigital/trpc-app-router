@@ -8,52 +8,12 @@ import { ModeToggle } from "@/components/appui/ModeToggle";
 import ThemeSwitcher from "@/components/appui/ThemeSwitcher";
 import MobileNav from "./MobileNav";
 import { Menu } from "lucide-react";
-
+import { navlinks, groupedLinks } from "@/constants/links";
 const Navbar = () => {
   const { session } = useSession();
   const userRole = checkUserRole(session);
-
-  const navlinks = [
-    { title: "Dashboard", url: "/admin", role: "org:admin" },
-
-    // Add more placeholder links as needed
-  ];
-
-  const groupedLinks = [
-    {
-      title: "HTML & CSS",
-      navlinks: [
-        { title: "TW Gradients", url: "/twgrads", role: "" },
-        { title: "ui-assets", url: "/ui-assets", role: "" },
-      ],
-      role: "",
-    },
-    {
-      title: "OpenAI",
-      navlinks: [
-        { title: "GPT", url: "/gpt", role: "org:ai" },
-        { title: "DALL-E", url: "/DALL-E", role: "org:ai" },
-      ],
-      role: "org:ai",
-    },
-    {
-      title: "Clerk",
-      navlinks: [
-        { title: "Profile", url: "/profile", role: "org:member" },
-        { title: "User", url: "/user", role: "org:member" },
-      ],
-      role: "org:ai",
-    },
-    {
-      title: "Users",
-      navlinks: [
-        { title: "Create", url: "/createuser", role: "" },
-        { title: "Read/Update/Delete", url: "/crud", role: "" },
-      ],
-      role: "org:admin",
-    },
-  ];
-
+  const theuser = session?.user;
+  console.log("User", theuser?.firstName, theuser?.lastName, userRole);
   return (
     <header
       className={
@@ -160,7 +120,7 @@ const Navbar = () => {
 
             <SignedOut>
               <a href="/sign-in">
-                <button className="mr-4 w-[90px] rounded border-0 bg-indigo-500 px-4 py-2 text-base text-white hover:bg-indigo-600 focus:outline-none">
+                <button className="mx-4 w-[90px] rounded border-0 bg-indigo-500 px-4 py-2 text-base text-white hover:bg-indigo-600 focus:outline-none">
                   Login
                 </button>
               </a>

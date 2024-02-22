@@ -24,7 +24,7 @@ const NestedLinkGenerator = ({
       group.navlinks.some(
         (link) =>
           link.role.includes(userRole) ||
-          (link.role.includes("org:member") && userRole.includes("org:ai")) ||
+          (link.role.includes("org:member") && userRole?.includes("org:ai")) ||
           userRole?.includes("org:admin") ||
           !link.role.length
       )
