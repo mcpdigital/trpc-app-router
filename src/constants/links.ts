@@ -1,5 +1,6 @@
 export const navlinks = [
   { title: "Dashboard", url: "/admin", role: "org:admin" },
+  { title: "CRUD", url: "/crud", role: "" },
 
   // Add more placeholder links as needed
 ];
@@ -28,13 +29,5 @@ export const groupedLinks = [
       { title: "User", url: "/user", role: "org:member" },
     ],
     role: "org:ai",
-  },
-  {
-    title: "Users",
-    navlinks: [
-      { title: "Create", url: "/createuser", role: "" },
-      { title: "Read/Update/Delete", url: "/crud", role: "" },
-    ],
-    role: "org:admin",
   },
 ];

@@ -19,6 +19,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { GRAD_OCEANIC, GRAD_PANDORA } from "@/tw_gradients";
 import { DialogClose } from "@radix-ui/react-dialog";
+import CreateUserPage from "@/components/appui/CreateUserPage";
 
 export default function UserManagementPage() {
   const [selectedUser, setSelectedUser] = useState<UserData | null>(null);
@@ -109,15 +110,18 @@ export default function UserManagementPage() {
   return (
     <div className="z-auto ">
       <div className="  bg-slate-300 dark:bg-slate-800">
-        <ToastContainer theme="dark" position="bottom-center" />
+        <div className="static  ml-6 ">
+          <CreateUserPage />
+        </div>
         <div className="mx-auto mt-4  mb-6 flex max-w-[98%] justify-center rounded-md border-slate-400 border dark:border-blue-600 dark:bg-gray-800 p-0.5 text-center  text-2xl text-gray-200 shadow-xl">
           <div className="  shadow-lg w-full rounded-md bg-slate-600 dark:bg-slate-800 p-1 text-2xl dark:text-gray-200">
             User Control
           </div>
         </div>
 
+        <ToastContainer theme="dark" position="bottom-center" />
         <div
-          className="  grid grid-cols-1 mx-auto my-2 gap-8 bg-slate-300 dark:bg-slate-800 p-2 dark:p-0 sm:mx-4 text-center sm:max-w-auto sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 "
+          className="  grid grid-cols-1 mx-auto my-4 gap-8 bg-slate-300 dark:bg-slate-800 p-2 dark:p-0 sm:mx-4 text-center sm:max-w-auto sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 "
           style={{ minHeight: "calc(85vh - 60px)" }}
         >
           {usersQuery.data?.map((user) => (
