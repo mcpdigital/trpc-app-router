@@ -24,8 +24,8 @@ export default function CreateUserPage() {
 
   return (
     <>
-      <Dialog open={isOpen}>
-        <DialogTrigger asChild onClick={() => setIsOpen(true)}>
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <DialogTrigger onClick={() => setIsOpen(true)}>
           {/* Your trigger button */}
           <Plus className="flex flex-row hover:ring-2 hover:ring-offset-1 bg-blue-500 h-12 w-12 justify-center items-center text-gray-200  rounded-full p-2 text-md shadow-md " />
         </DialogTrigger>

@@ -1,7 +1,8 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { trpc } from "@/lib/trpc/trpc-client";
 import { CreateUserData } from "@/types/types";
+import Loading from "../Loading";
 
 export default function CreateUserForm({
   onClose,
@@ -13,9 +14,10 @@ export default function CreateUserForm({
   const formRef = useRef<HTMLFormElement>(null);
   const createUserMutation = trpc.userData.createUserData.useMutation();
   const usersQuery = trpc.userData.getUserData.useQuery();
+  const [isLoading, setIsLoading] = useState(false);
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-
+    setIsLoading(true);
     if (!formRef.current) {
       return;
     }
@@ -48,7 +50,7 @@ export default function CreateUserForm({
       onSuccess: () => {
         // Clear the form
         formRef.current?.reset();
-
+        setIsLoading(false);
         // Show a success toast
         // toast.success("User created successfully!", { autoClose: 2000 });
         usersQuery.refetch();
@@ -214,6 +216,11 @@ export default function CreateUserForm({
                 className="dark:text-slate-900 min-w-24 dark:hover:text-slate-200 dark:active-text-slate-200 text-gray-900 p-2 rounded-2xl bg-slate-200 hover:bg-slate-100 dark:hover:bg-slate-950 active:bg-slate-100  border-2 border-slate-300 dark:border-slate-800 hover:border-slate-200 dark:hover:border-slate-900 active:border-slate-900 dark:active:border-slate-200 ring-blue-600 ring-4"
               >
                 Create
+                {isLoading && (
+                  <div className="inline-grid columns-2 col-span-2 fixed sm:-mt-[40%] -mt-[50%]">
+                    <Loading />
+                  </div>
+                )}
               </button>
 
               <button

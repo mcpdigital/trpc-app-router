@@ -14,11 +14,12 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogClose,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { GRAD_OCEANIC, GRAD_PANDORA } from "@/tw_gradients";
-import { DialogClose } from "@radix-ui/react-dialog";
+// import { DialogClose } from "@radix-ui/react-dialog";
 import CreateUserPage from "@/components/appui/CreateUserPage";
 
 export default function UserManagementPage() {
