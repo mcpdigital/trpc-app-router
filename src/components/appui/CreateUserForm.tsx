@@ -3,7 +3,13 @@ import { useRef } from "react";
 import { trpc } from "@/lib/trpc/trpc-client";
 import { CreateUserData } from "@/types/types";
 
-export default function CreateUserForm({ onClose, onErr }) {
+export default function CreateUserForm({
+  onClose,
+  onErr,
+}: {
+  onClose: () => void;
+  onErr: () => void;
+}) {
   const formRef = useRef<HTMLFormElement>(null);
   const createUserMutation = trpc.userData.createUserData.useMutation();
   const usersQuery = trpc.userData.getUserData.useQuery();
