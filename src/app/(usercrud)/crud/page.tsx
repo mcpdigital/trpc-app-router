@@ -110,8 +110,8 @@ export default function UserManagementPage() {
   return (
     <div className="z-auto ">
       <div className="  bg-slate-300 dark:bg-slate-800 ">
-        <div className="mx-auto mt-4 flex max-w-[50%] mb-6 justify-center rounded-md border-slate-400 border dark:border-slate-700 dark:bg-gray-800 p-0.5 text-center  text-2xl text-gray-200 shadow-xl">
-          <div className="  shadow-lg w-full rounded-md bg-slate-600 dark:bg-slate-900 p-1 text-2xl dark:text-gray-200">
+        <div className="mx-auto  mt-4 flex max-w-[50%] mb-6 justify-center rounded-md border-slate-400 border dark:border-slate-700 dark:bg-gray-800 p-0.5 text-center  text-2xl text-gray-200 shadow-xl">
+          <div className="  shadow-lg w-full rounded-md bg-slate-300 dark:bg-slate-900 p-1 text-2xl text-gray-800/80 dark:text-gray-200">
             User Control
           </div>
         </div>

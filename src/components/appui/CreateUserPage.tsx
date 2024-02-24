@@ -1,13 +1,13 @@
+import CreateUserForm from "./CreateUserForm";
+import { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import { Plus } from "lucide-react";
 import {
   Dialog,
   DialogTrigger,
   DialogContent,
   DialogClose,
 } from "@/components/ui/dialog";
-import CreateUserForm from "./CreateUserForm";
-import { useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
-import { Plus } from "lucide-react";
 
 export default function CreateUserPage() {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,9 +25,9 @@ export default function CreateUserPage() {
   return (
     <>
       <Dialog open={isOpen}>
-        <DialogTrigger onClick={() => setIsOpen(true)}>
+        <DialogTrigger asChild onClick={() => setIsOpen(true)}>
           {/* Your trigger button */}
-          <Plus className="flex flex-row hover:ring-2 hover:ring-offset-1 bg-blue-500 h-12 w-12 justify-center items-center text-gray-200  rounded-full p-2 text-md shadow-lg " />
+          <Plus className="flex flex-row hover:ring-2 hover:ring-offset-1 bg-blue-500 h-12 w-12 justify-center items-center text-gray-200  rounded-full p-2 text-md shadow-md " />
         </DialogTrigger>
         <DialogContent className="mx-auto min-w-[75%]">
           {isOpen && (

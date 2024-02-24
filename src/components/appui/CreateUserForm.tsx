@@ -118,6 +118,13 @@ export default function CreateUserForm({
               <input
                 className="dark:text-slate-900 text-slate-900 p-2 w-[48%]"
                 type="text"
+                name="website"
+                placeholder="Website"
+                autoComplete="off"
+              />
+              <input
+                className="dark:text-slate-900 text-slate-900 p-2 w-[48%]"
+                type="text"
                 name="avatar"
                 placeholder="Avatar"
                 autoComplete="off"
