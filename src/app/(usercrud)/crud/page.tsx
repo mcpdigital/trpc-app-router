@@ -109,16 +109,15 @@ export default function UserManagementPage() {
 
   return (
     <div className="z-auto ">
-      <div className="  bg-slate-300 dark:bg-slate-800">
-        <div className="static  ml-6 ">
-          <CreateUserPage />
-        </div>
-        <div className="mx-auto mt-4  mb-6 flex max-w-[98%] justify-center rounded-md border-slate-400 border dark:border-blue-600 dark:bg-gray-800 p-0.5 text-center  text-2xl text-gray-200 shadow-xl">
-          <div className="  shadow-lg w-full rounded-md bg-slate-600 dark:bg-slate-800 p-1 text-2xl dark:text-gray-200">
+      <div className="  bg-slate-300 dark:bg-slate-800 ">
+        <div className="mx-auto mt-4 flex max-w-[50%] mb-6 justify-center rounded-md border-slate-400 border dark:border-slate-700 dark:bg-gray-800 p-0.5 text-center  text-2xl text-gray-200 shadow-xl">
+          <div className="  shadow-lg w-full rounded-md bg-slate-600 dark:bg-slate-900 p-1 text-2xl dark:text-gray-200">
             User Control
           </div>
         </div>
-
+        <div className="-mt-16 ml-8" about="Add User">
+          <CreateUserPage />
+        </div>
         <ToastContainer theme="dark" position="bottom-center" />
         <div
           className="  grid grid-cols-1 mx-auto my-4 gap-8 bg-slate-300 dark:bg-slate-800 p-2 dark:p-0 sm:mx-4 text-center sm:max-w-auto sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 "
