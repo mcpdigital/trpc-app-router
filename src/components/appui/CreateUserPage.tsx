@@ -22,6 +22,8 @@ export default function CreateUserPage() {
     toast.error("User creation canceled or error!", { autoClose: 1000 });
   };
 
+  // If you want control the opening state by yourself, the open prop is the way to go, however, you also need to set the onOpenChange, so that the close button wiil able to trigger the onOpenChange event and change the state that you created.
+
   return (
     <>
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
