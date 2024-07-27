@@ -21,7 +21,8 @@ export async function POST(req: Request) {
     // Ask OpenAI for a streaming completion given the prompt
     const params: OpenAI.Chat.ChatCompletionCreateParams = {
       messages: [{ role: "user", content: prompt }],
-      model: "gpt-3.5-turbo",
+      model: "gpt-4o-mini",
+      stream: false,
       max_tokens: max_tokens,
     };
     const chatCompletion: OpenAI.Chat.ChatCompletion =
