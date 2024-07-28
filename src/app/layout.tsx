@@ -30,7 +30,7 @@ export default function RootLayout({
         baseTheme: shadesOfPurple,
       }}
     >
-      <html data-theme="dark" lang="en">
+      <html data-theme="light" lang="en">
         <body
           className={` antialiased size-full font-sans text-black bg-slate-300 dark:bg-slate-800 dark:text-white/75 ${inter.variable}`}
         >
