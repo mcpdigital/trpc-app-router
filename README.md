@@ -1,6 +1,7 @@
 # Next.js 14.1 Application with TRPC, Prisma, Clerk, and Tailwind CSS
 
 This is a full-stack small application for my learning, built using a modern tech stack of Node.js, Next.js, React, tRPC, Prisma, Clerk, and Tailwind CSS. The application features a CRUD interface for a `UserData` schema, which corresponds to the data structure returned by the [JSONPlaceholder API](https://jsonplaceholder.typicode.com/users).
+Demo: https://trpc-app-router.vercel.app/
 
 ## Tech Stack
 
